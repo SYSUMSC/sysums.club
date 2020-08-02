@@ -1,0 +1,68 @@
+@import 'components/theme-definition';
+
+.rootContainer {
+  max-width: $xlGap;
+  margin: 0 auto;
+  padding: 16px 24px;
+  @media (max-width: $mdGap) {
+    padding: 16px;
+  }
+
+  .selectedArticleContainer {
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 12px;
+
+    .articleCarouselWrapper {
+      grid-column: 1 / 3;
+      @media (max-width: $mdGap) {
+        grid-column: 1 / 4;
+      }
+      max-height: 240px;
+      height: 100%;
+      border: 1px solid rgba(0, 0, 0, 0.125);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .articleCardSimpleContainer {
+      display: grid;
+      grid-column: 3 / 4;
+      @media (max-width: $mdGap) {
+        grid-column: 1 / 4;
+      }
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(3, 1fr);
+      grid-row-gap: 8px;
+    }
+  }
+
+  .middleToolboxContainer {
+    padding: 16px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    background: $theme-color;
+    color: $theme-text-color-white;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-around;
+    @media (max-width: $smGap) {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .searchButton {
+      @media (max-width: $smGap) {
+        &:not(:last-child) {
+          margin-bottom: 8px;
+        }
+      }
+
+      .text {
+        margin-left: 6px;
+        color: unset !important;
+      }
+    }
+  }
+}

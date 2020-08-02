@@ -1,0 +1,79 @@
+@import 'components/theme-definition';
+
+.rootContainer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .carouselContainer {
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.05) radial-gradient(transparent 70%, rgba(0, 0, 0, 0.8));
+      z-index: 100;
+    }
+
+    .carouselImage {
+      width: 100%;
+      height: 70vh;
+      object-fit: cover;
+    }
+
+    .textContainer {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      user-select: none;
+      z-index: 200;
+
+      .slogan {
+        color: $theme-text-color-white;
+        letter-spacing: 0.1em;
+        text-shadow: 0 0 16px rgba(0, 0, 0, 1), 0 0 8px rgba(0, 0, 0, 0.5);
+        margin-bottom: 36px;
+        font-weight: bold;
+
+        @media (max-width: $smGap) {
+          font-size: 36px;
+          margin-bottom: 12px;
+        }
+      }
+
+      .description {
+        font-weight: normal;
+        letter-spacing: 0.1em;
+        color: $theme-text-color-white;
+        text-shadow: 0 0 4px rgba(0, 0, 0, 0.8), 0 0 16px rgba(0, 0, 0, 1);
+
+        a {
+          color: unset;
+        }
+      }
+    }
+  }
+
+  .contentContainer {
+    flex-grow: 1;
+    background-color: $theme-color;
+    color: $theme-text-color-white;
+    padding: 24px 16px;
+
+    .content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+  }
+}

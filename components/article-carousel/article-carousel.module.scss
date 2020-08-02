@@ -1,0 +1,31 @@
+@import 'components/theme-definition';
+
+.carouselContainer {
+  position: relative;
+  height: 100%;
+
+  .articleInfoContainer {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 60%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
+
+    .title {
+      margin-bottom: 0;
+      padding: 16px;
+      position: absolute;
+      bottom: 0;
+      color: $theme-text-color-white;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+    }
+  }
+}
+
+.carouselImage {
+  display: block;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}

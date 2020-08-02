@@ -1,0 +1,9 @@
+.tagContainer {
+  & > *:not(:first-child) {
+    margin-left: 8px;
+  }
+
+  .tag {
+    cursor: pointer;
+  }
+}
