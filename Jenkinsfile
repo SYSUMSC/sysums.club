@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'docker-compose -f /var/docker-compose.yml up -d --no-recreate --build website'
+                sh 'docker-compose -f /var/docker-compose.yml up -d --build website'
             }
         }
     }
