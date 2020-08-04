@@ -68,12 +68,90 @@
   .contentContainer {
     flex-grow: 1;
     background-color: $theme-color;
-    color: $theme-text-color-white;
-    padding: 24px 16px;
+    color: $theme-text-color-grey-white;
+    padding: 64px 16px;
 
     .content {
-      max-width: 800px;
+      max-width: 720px;
       margin: 0 auto;
+
+      .contentSection {
+        &:not(:last-child) {
+          margin-bottom: 64px;
+        }
+
+        .title {
+          color: $theme-text-color-white;
+          text-align: center;
+        }
+
+        .paragraph {
+          padding: 0 12px;
+          word-break: break-all;
+        }
+
+        .quoteSource {
+          padding: 0 12px;
+          text-align: center;
+        }
+
+        .imageContainer {
+          margin: 24px auto;
+          border-radius: 4px;
+          overflow: hidden;
+          position: relative;
+          width: 80%;
+          @media (max-width: $smGap) {
+            width: 100%;
+          }
+
+          &::before {
+            z-index: 100;
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), transparent 20%),
+              linear-gradient(to left, rgba(0, 0, 0, 0.3), transparent 20%),
+              linear-gradient(to right, rgba(0, 0, 0, 0.3), transparent 20%);
+          }
+
+          .caption {
+            z-index: 200;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            padding: 16px 32px;
+            @media (max-width: $smGap) {
+              padding: 8px 16px;
+            }
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: $theme-text-color-grey-white;
+            font-weight: normal;
+
+            .captionTitle {
+              text-shadow: 0 0 4px rgba(0, 0, 0, 0.8), 0 0 8px rgba(0, 0, 0, 0.5);
+              color: $theme-text-color-white;
+              margin-bottom: 4px;
+              letter-spacing: 0.05em;
+            }
+
+            .description {
+              text-shadow: 0 0 4px rgba(0, 0, 0, 0.8), 0 0 16px rgba(0, 0, 0, 1);
+              margin-bottom: 0;
+            }
+          }
+
+          .image {
+            width: 100%;
+            object-fit: cover;
+            user-select: none;
+          }
+        }
+      }
     }
   }
 }
