@@ -9,7 +9,11 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'docker-compose -f /var/docker-compose.yml up -d --build website'
+                node('docker-host') {
+                    script {
+                        sh 'docker-compose -f /home/sysumsc/services/docker-compose.yml up --build -d website'
+                    }
+                }
             }
         }
     }
