@@ -16,6 +16,7 @@ import {
   TagListContainer,
   TagListContainerProps
 } from '../../../components/tag-list-container/tag-list-container';
+import Head from 'next/head';
 
 type ArticleDetailProps = {
   title: string;
@@ -47,12 +48,15 @@ export default function ArticleDetail({
   const [zoomedInImage, setZoomedInImage] = useState<string>(null);
   return (
     <AppFrame>
+      <Head>
+        <title>{title} · 博客 · SYSUMSC</title>
+      </Head>
       {zoomedInImage && (
         <div className={styles.imageOverlay} onClick={() => setZoomedInImage(null)}>
           <Image src={zoomedInImage} fluid />
         </div>
       )}
-      <div className={styles.rootContainer}>
+      <main className={styles.rootContainer}>
         <article className={styles.article}>
           <header className={styles.header}>
             <h1>{title}</h1>
@@ -73,7 +77,7 @@ export default function ArticleDetail({
         </article>
         <TagListContainer {...tagList} />
         <AuthorInfo {...authorInfo} />
-      </div>
+      </main>
     </AppFrame>
   );
 }
@@ -140,6 +144,11 @@ query ArticleDetailQuery($id: ID!) {
 `;
 
 const converter = new Converter({
+  emoji: true,
+  openLinksInNewWindow: true,
+  tasklists: true,
+  strikethrough: true,
+  tables: true,
   extensions: [
     showdownKatex({
       displayMode: true,

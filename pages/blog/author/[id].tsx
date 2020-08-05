@@ -16,6 +16,7 @@ type AuthorDetailProps = {
 export default function AuthorDetail({ authorInfo, articles }: AuthorDetailProps) {
   return (
     <AppFrame>
+      <title>{authorInfo.name} · 博客 · SYSUMSC</title>
       <div className={styles.rootContainer}>
         <section className={styles.authorInfoContainer}>
           <AuthorInfo {...authorInfo} />

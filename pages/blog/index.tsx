@@ -27,6 +27,7 @@ export default function BlogPage({ carouselArticles, pinnedArticles, articles }:
   const [showingArticles, setShowingArticles] = useState(articles);
   return (
     <AppFrame>
+      <title>博客 · SYSUMSC</title>
       <div className={styles.rootContainer}>
         <div className={styles.selectedArticleContainer}>
           <div className={styles.articleCarouselWrapper}>

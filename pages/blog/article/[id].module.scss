@@ -4,7 +4,7 @@
   position: relative;
   padding: 32px;
   @media (max-width: $smGap) {
-    padding: 12px;
+    padding: 32px 12px;
   }
 
   & > * {

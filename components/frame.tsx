@@ -27,7 +27,7 @@ export const AppFrame: FC = ({ children }) => {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <main className={styles.mainSection}>{children}</main>
+      <div className={styles.mainSection}>{children}</div>
       <footer className={styles.footerSection}>
         <div className={styles.sectionContainer}>
           <div className={styles.section}>

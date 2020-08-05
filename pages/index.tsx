@@ -4,13 +4,14 @@ import React from 'react';
 import { Carousel } from 'react-bootstrap';
 
 const carouselImageUrls = [
-  'https://wp.sysums.club/wp-content/uploads/2020/08/1151596377469_.pic_hd-scaled.jpg',
-  'https://wp.sysums.club/wp-content/uploads/2020/08/1161596377470_.pic_hd-scaled.jpg'
+  'https://sysumsc-website.oss-cn-shenzhen.aliyuncs.com/2020/08/1151596377469_.pic_hd-scaled.jpg',
+  'https://sysumsc-website.oss-cn-shenzhen.aliyuncs.com/2020/08/hackathon.png'
 ];
 
 export default function HomePage() {
   return (
     <AppFrame>
+      <title>首页 · SYSUMSC</title>
       <div className={styles.rootContainer}>
         <div className={styles.carouselContainer}>
           <Carousel indicators={false} controls={false}>

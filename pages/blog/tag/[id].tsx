@@ -16,6 +16,7 @@ type TagDetailProps = {
 export default function TagDetail({ name, description, articles }: TagDetailProps) {
   return (
     <AppFrame>
+      <title>{name} · 博客 · SYSUMSC</title>
       <div className={styles.rootContainer}>
         <h3 className={styles.title}>标签: {name}</h3>
         <p className={styles.description}>{description}</p>
