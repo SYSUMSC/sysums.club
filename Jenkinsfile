@@ -4,7 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'cp /var/jenkins_home/project_secrets/sysums.club/.env.local ./'
-                sh 'docker build -t sysumsc/website:lastest .'
+                sh 'docker build -t sysumsc/website:latest .'
             }
         }
         stage('Deploy') {
