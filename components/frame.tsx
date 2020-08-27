@@ -8,7 +8,14 @@ export const AppFrame: FC = ({ children }) => {
   return (
     <div className={styles.rootContainer}>
       <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark">
-        <Navbar.Brand href="/">SYSUMSC</Navbar.Brand>
+        <Navbar.Brand href="/">
+          <img
+            src="logo-small.png"
+            height="30"
+            className="d-inline-block align-top"
+            alt="SYSUMSC"
+          />
+        </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse>
           <Nav className="justify-content-end" activeKey={primaryPath}>
@@ -20,9 +27,6 @@ export const AppFrame: FC = ({ children }) => {
             </Nav.Item>
             <Nav.Item>
               <Nav.Link href="/game">解密</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link href="/about">关于</Nav.Link>
             </Nav.Item>
           </Nav>
         </Navbar.Collapse>
@@ -72,7 +76,15 @@ export const AppFrame: FC = ({ children }) => {
           <div className={styles.section}>
             <h5 className={styles.title}>关于我们</h5>
             <ul className={styles.list}>
-              <li>WIP</li>
+              <li>
+                <div className={styles.logoContainer}>
+                  <img alt="logo" src="logo.png" className={styles.logo} />
+                  <div className={styles.intro}>
+                    <p>予力众生，成就不凡。</p>
+                    <p>我们是中山大学微软俱乐部。</p>
+                  </div>
+                </div>
+              </li>
             </ul>
           </div>
         </div>

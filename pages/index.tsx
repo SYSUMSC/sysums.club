@@ -23,9 +23,7 @@ export default function HomePage() {
           </Carousel>
           <div className={styles.textContainer}>
             <h1 className={styles.slogan}>予力众生 成就不凡</h1>
-            <p className={styles.description}>
-              我们是中山大学微软俱乐部，<a href="/about">加入我们</a>！
-            </p>
+            <p className={styles.description}>我们是中山大学微软俱乐部</p>
           </div>
         </div>
         <div className={styles.contentContainer}>
@@ -33,12 +31,21 @@ export default function HomePage() {
             <section className={styles.contentSection}>
               <h4 className={styles.title}>我们是谁</h4>
               <p className={styles.paragraph}>
-                我们是中山大学的技术类社团MS
-                Club（缩写SYSUMSC)，我们本着“学习先进技术，开拓创新思维，体验多元文化，成就一流人才”的宗旨，
-                在MS Club，你能获得来自 MSRA（微软亚洲研究院）
-                导师的亲自指导，结识技术大牛，接触前沿技术，感受微软文化，参加微软夏令营， 更有 MSRA
-                实习内推机会。
+                我们是来自中山大学广州东校区的技术类社团MS
+                Club（缩写SYSUMSC)。在我们这里，你能结识到不少热衷于编程技术的伙伴，相互探讨、共同进步，还能获得来自
+                MSRA（微软亚洲研究院）导师的亲自指导，结识技术大牛，接触前沿技术，感受微软文化。我们每年都会有部员参加微软夏令营，优秀的部员更有
+                MSRA 实习内推机会。
               </p>
+            </section>
+            <section className={styles.contentSection}>
+              <h4 className={styles.title}>
+                “学习先进技术，开括创新思维，体验多元文化，成就一流人才”
+              </h4>
+              <p className={styles.quoteSource}>是我们不变的宗旨。</p>
+            </section>
+            <section className={styles.contentSection}>
+              <h4 className={styles.title}>“东校区第一技术社团”</h4>
+              <p className={styles.quoteSource}>是对我们的普遍评价。</p>
             </section>
             <section className={styles.contentSection}>
               <h4 className={styles.title}>我们的活动内容</h4>
@@ -51,17 +58,7 @@ export default function HomePage() {
               </p>
             </section>
             <section className={styles.contentSection}>
-              <h4 className={styles.title}>
-                “学习先进技术，开括创新思维，体验多元文化，成就一流人才”
-              </h4>
-              <p className={styles.quoteSource}>是我们不变的宗旨</p>
-            </section>
-            <section className={styles.contentSection}>
-              <h4 className={styles.title}>“东校区第一技术社团”</h4>
-              <p className={styles.quoteSource}>是对我们的普遍评价</p>
-            </section>
-            <section className={styles.contentSection}>
-              <h4 className={styles.title}>我们的照片</h4>
+              <h4 className={styles.title}>我们的活动照片</h4>
               <figure className={styles.imageContainer}>
                 <img
                   className={styles.image}
@@ -70,7 +67,7 @@ export default function HomePage() {
                 />
                 <figcaption className={styles.caption}>
                   <h5 className={styles.captionTitle}>技术分享</h5>
-                  <p className={styles.description}>每周举办技术分享，特别牛逼，特别精彩！</p>
+                  <p className={styles.description}>每周举办技术分享，传播知识，共进发展。</p>
                 </figcaption>
               </figure>
               <figure className={styles.imageContainer}>
@@ -81,7 +78,7 @@ export default function HomePage() {
                 />
                 <figcaption className={styles.caption}>
                   <h5 className={styles.captionTitle}>黑客松</h5>
-                  <p className={styles.description}>每年定期举办的黑客松大赛，基情四射！</p>
+                  <p className={styles.description}>每年定期举办黑客松，紧张刺激，挑战自我。</p>
                 </figcaption>
               </figure>
               <figure className={styles.imageContainer}>
@@ -92,13 +89,27 @@ export default function HomePage() {
                 />
                 <figcaption className={styles.caption}>
                   <h5 className={styles.captionTitle}>团队建设</h5>
-                  <p className={styles.description}>每年定期举办的团建活动，好吃又好VAN！</p>
+                  <p className={styles.description}>每年定期举办团建活动，相互协作，增进友谊。</p>
                 </figcaption>
               </figure>
             </section>
             <section className={styles.contentSection}>
               <h4 className={styles.title}>加入我们</h4>
-              <p className={styles.quoteSource}>每年九月我们都会举行招新活动，请看这里。</p>
+              <p className={styles.quoteSource}>
+                每年九月中旬前后我们都会举行招新活动，请留意我们在
+                <a target="_blank" href="/blog">
+                  博客
+                </a>
+                和
+                <a
+                  href="https://mp.weixin.qq.com/s/jBrrgkhmDRwZdyl_JikW4A"
+                  rel="noopener"
+                  target="_blank"
+                >
+                  微信公众号
+                </a>
+                中发布的招新公告。
+              </p>
             </section>
           </div>
         </div>

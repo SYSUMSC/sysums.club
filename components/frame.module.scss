@@ -39,6 +39,29 @@
           li > a {
             color: unset;
           }
+
+          .logoContainer {
+            display: flex;
+            align-items: flex-start;
+
+            .logo {
+              display: inline-block;
+              width: auto;
+              height: 60px;
+            }
+
+            .intro {
+              height: 60px;
+              margin-left: 8px;
+              display: inline-flex;
+              flex-direction: column;
+              justify-content: space-around;
+
+              p {
+                margin-bottom: 0;
+              }
+            }
+          }
         }
       }
     }

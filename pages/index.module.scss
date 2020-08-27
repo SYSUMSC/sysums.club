@@ -77,7 +77,7 @@
 
       .contentSection {
         &:not(:last-child) {
-          margin-bottom: 64px;
+          margin-bottom: 78px;
         }
 
         .title {
@@ -104,6 +104,7 @@
           @media (max-width: $smGap) {
             width: 100%;
           }
+          box-shadow: 0 3px 16px rgba(0, 0, 0, 0.5);
 
           &::before {
             z-index: 100;

@@ -42,8 +42,8 @@ export default function BlogPage({ carouselArticles, pinnedArticles, articles }:
         <div className={styles.middleToolboxContainer}>
           <div className={styles.searchButton}>
             <TeamOutlined />
-            <a className={styles.text} href="/about">
-              加入我们
+            <a className={styles.text} href="/">
+              关于我们
             </a>
           </div>
           <div className={styles.searchButton}>
