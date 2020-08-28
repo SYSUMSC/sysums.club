@@ -10,7 +10,7 @@ export const AppFrame: FC = ({ children }) => {
       <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark">
         <Navbar.Brand href="/">
           <img
-            src="logo-small.png"
+            src="/logo-small.png"
             height="30"
             className="d-inline-block align-top"
             alt="SYSUMSC"
@@ -78,7 +78,7 @@ export const AppFrame: FC = ({ children }) => {
             <ul className={styles.list}>
               <li>
                 <div className={styles.logoContainer}>
-                  <img alt="logo" src="logo.png" className={styles.logo} />
+                  <img alt="logo" src="/logo.png" className={styles.logo} />
                   <div className={styles.intro}>
                     <p>予力众生，成就不凡。</p>
                     <p>我们是中山大学微软俱乐部。</p>
