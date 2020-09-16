@@ -3,6 +3,10 @@ export function toNormalDate(dateString: string) {
   return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
 }
 
+export function makeApiPath(path: string) {
+  return `${process.env.NODE_ENV === 'development' ? 'http://localhost:3000/' : '/api/'}${path}`;
+}
+
 export function resolveAuthorName({
   firstName,
   lastName,

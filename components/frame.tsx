@@ -1,24 +1,29 @@
 import React, { FC } from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
-import { usePrimaryPath } from '../utils/use-primary-path';
 import styles from './frame.module.scss';
+import { UserStatus } from './user-status/user-status';
+import { WithSWRConfig } from '../utils/use-user';
+import { usePrimaryPath } from '../utils/use-primary-path';
 
-export const AppFrame: FC = ({ children }) => {
+export const AppFrame: FC = ({ children }) =>
+  WithSWRConfig(<AppFrameContent children={children} />);
+
+const AppFrameContent: FC = ({ children }) => {
   const primaryPath = usePrimaryPath();
   return (
     <div className={styles.rootContainer}>
       <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark">
         <Navbar.Brand href="/">
           <img
-            src="/logo-small.png"
+            src="/logo-h30.png"
+            srcSet="/logo-h30.png 1x, /logo-h60.png 2x"
             height="30"
-            className="d-inline-block align-top"
             alt="SYSUMSC"
           />
         </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse>
-          <Nav className="justify-content-end" activeKey={primaryPath}>
+          <Nav activeKey={primaryPath}>
             <Nav.Item>
               <Nav.Link href="/">首页</Nav.Link>
             </Nav.Item>
@@ -29,6 +34,9 @@ export const AppFrame: FC = ({ children }) => {
               <Nav.Link href="/game">解密</Nav.Link>
             </Nav.Item>
           </Nav>
+          <Navbar.Text className="ml-auto">
+            <UserStatus />
+          </Navbar.Text>
         </Navbar.Collapse>
       </Navbar>
       <div className={styles.mainSection}>{children}</div>
@@ -78,10 +86,15 @@ export const AppFrame: FC = ({ children }) => {
             <ul className={styles.list}>
               <li>
                 <div className={styles.logoContainer}>
-                  <img alt="logo" src="/logo.png" className={styles.logo} />
+                  <img
+                    alt="logo"
+                    srcSet="/logo-h60.png 1x, /logo-h120.png 2x"
+                    src="/logo-h60.png"
+                    className={styles.logo}
+                  />
                   <div className={styles.intro}>
-                    <p>予力众生，成就不凡。</p>
-                    <p>我们是中山大学微软俱乐部。</p>
+                    <p>由一群热爱技术的计算机爱好者</p>
+                    <p>于2002年夏在中大校园正式成立</p>
                   </div>
                 </div>
               </li>

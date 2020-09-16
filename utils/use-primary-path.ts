@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 export function usePrimaryPath() {
   const [primaryPath, setPrimaryPath] = useState<string>(null);

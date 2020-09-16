@@ -18,12 +18,19 @@
 
     .sectionContainer {
       max-width: 800px;
+      padding: 0 24px;
       margin: 0 auto;
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
       flex-wrap: wrap;
 
       .section {
+        margin-bottom: 12px;
+
+        &:not(:last-child) {
+          margin-right: 24px;
+        }
+
         .title {
           color: $theme-text-color-white;
           margin-bottom: 6px;
