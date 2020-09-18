@@ -9,8 +9,7 @@ import { Converter } from 'showdown';
 import showdownKatex from 'showdown-katex';
 import hljs from 'highlight.js';
 import { AuthorInfo, AuthorInfoProps } from '../../../components/author-info/author-info';
-import { Card } from 'react-bootstrap';
-import { fetchFromApi } from '../../../utils/api';
+import { fetchFromApi } from '../../../utils/wp-api';
 import { resolveAuthorName, toNormalDate } from '../../../utils/utils';
 import {
   TagListContainer,

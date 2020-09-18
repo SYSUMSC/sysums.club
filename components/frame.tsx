@@ -3,7 +3,7 @@ import { Nav, Navbar } from 'react-bootstrap';
 import styles from './frame.module.scss';
 import { UserStatus } from './user-status/user-status';
 import { WithSWRConfig } from '../utils/use-user';
-import { usePrimaryPath } from '../utils/use-primary-path';
+import { usePrimaryPath } from '../utils/utils';
 
 export const AppFrame: FC = ({ children }) =>
   WithSWRConfig(<AppFrameContent children={children} />);

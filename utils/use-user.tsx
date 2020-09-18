@@ -1,65 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import useSWR from 'swr';
 import { SWRConfig } from 'swr';
-import { makeApiPath } from './utils';
-
-export type ApiResponse = {
-  statusCode: number;
-  message: string;
-};
+import { fetchApi } from './api';
+import { useLocalStorageUpdate } from './utils';
 
 export type User = {
   email: string;
   phone_number: string;
 };
 
-function getTokenHeader() {
-  const token = localStorage.getItem('token');
-  if (token) {
-    return { Authentication: `Bearer ${token}` };
-  } else {
-    return {};
-  }
-}
-
-function useLocalStorageUpdateEvent(listener: () => any) {
-  useEffect(() => {
-    window.addEventListener('storage', listener);
-    return () => window.removeEventListener('storage', listener);
-  }, []);
-}
-
 export function WithSWRConfig(component: any) {
-  return (
-    <SWRConfig
-      value={{
-        fetcher: (resource, init) =>
-          fetch(resource, { ...init, headers: { ...getTokenHeader() } }).then((res) => res.json())
-      }}
-    >
-      {component}
-    </SWRConfig>
-  );
+  return <SWRConfig value={{ fetcher: fetchApi }}>{component}</SWRConfig>;
 }
 
 export function useUser() {
-  if (!process.browser) {
-    return {
-      notLoggedIn: true
-    };
-  }
-  const [token, setToken] = useState<string>(localStorage.getItem('token'));
-  const { data, error } = useSWR<User, ApiResponse>(token ? makeApiPath('user') : null);
-  useLocalStorageUpdateEvent(() => {
-    const newToken = localStorage.getItem('token');
-    if (newToken && newToken !== token) {
-      setToken(newToken);
-    }
+  const [token, setToken] = useState<string>();
+  const { data, error } = useSWR<User>(token ? 'user/profile' : null, {
+    shouldRetryOnError: false
   });
+  useLocalStorageUpdate('app_user_token', () => setToken(localStorage.getItem('app_user_token')));
+  useEffect(() => {
+    if (error) {
+      localStorage.removeItem('app_user_token');
+    }
+  }, [error]);
   return {
     notLoggedIn: !token,
     user: data,
-    isLoading: !error && !data,
-    isErrored: error
+    isLoading: !error && !data && !!token,
+    isErrored: !!error
   };
 }

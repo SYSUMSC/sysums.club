@@ -8,13 +8,21 @@
   }
 }
 
+.logoutButton {
+  padding-left: 8px;
+}
+
 .split {
   cursor: default;
 }
 
-.loginModalButtonContainer {
+.buttonContainer {
   padding-top: 8px;
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
+}
+
+.warningIcon {
+  padding-right: 8px;
 }

@@ -12,7 +12,7 @@ import {
 } from '../../components/article-card-simple/article-card-simple';
 import { ArticleListContainer } from '../../components/article-list-container/article-list-container';
 import { GetStaticProps } from 'next';
-import { fetchFromApi } from '../../utils/api';
+import { fetchFromApi } from '../../utils/wp-api';
 import { resolveAuthorName, toNormalDate } from '../../utils/utils';
 import { SearchOutlined, TeamOutlined } from '@ant-design/icons/lib';
 import { SearchBar } from '../../components/search-bar/search-bar';

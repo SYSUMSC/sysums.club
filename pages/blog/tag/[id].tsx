@@ -4,7 +4,7 @@ import React from 'react';
 import { ArticleListContainer } from '../../../components/article-list-container/article-list-container';
 import { ArticleCardProps } from '../../../components/article-card/article-card';
 import styles from './[id].module.scss';
-import { fetchFromApi } from '../../../utils/api';
+import { fetchFromApi } from '../../../utils/wp-api';
 import { resolveAuthorName, toNormalDate } from '../../../utils/utils';
 
 type TagDetailProps = {
