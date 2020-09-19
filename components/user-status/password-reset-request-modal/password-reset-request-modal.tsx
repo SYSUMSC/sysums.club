@@ -1,7 +1,7 @@
 import React, { FC, FormEvent, useState } from 'react';
 import { useAsyncAction } from '../../../utils/utils';
 import { Form, Modal } from 'react-bootstrap';
-import { fetchApi } from '../../../utils/api';
+import { fetchFromApi } from '../../../utils/api';
 import styles from '../login-modal/login-modal.module.scss';
 import { AsyncDataButton } from '../../shared/async-data-button/async-data-button';
 import { CheckOutlined } from '@ant-design/icons';
@@ -40,7 +40,7 @@ export const PasswordResetRequestModal: FC<PasswordResetRequestModalProps> = ({
             const dto: PasswordResetRequestDto = { email };
             if (form.checkValidity()) {
               setRequesting(true);
-              fetchApi(
+              fetchFromApi(
                 'user/reset-request',
                 {
                   method: 'POST',

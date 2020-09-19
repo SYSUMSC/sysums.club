@@ -15,11 +15,11 @@ mutation {
 }`;
 
 export async function login() {
-  const response = await fetchFromApi(loginMutation, {}, true);
+  const response = await fetchFromWpApi(loginMutation, {}, true);
   FETCH_HEADERS['Authorization'] = `Bearer ${response.login.authToken}`;
 }
 
-export async function fetchFromApi(query: string, variables: any = {}, skipAuthCheck = false) {
+export async function fetchFromWpApi(query: string, variables: any = {}, skipAuthCheck = false) {
   if (!FETCH_HEADERS['Authorization'] && !skipAuthCheck) {
     await login();
   }

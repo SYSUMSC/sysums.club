@@ -8,14 +8,14 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { Converter } from 'showdown';
 import showdownKatex from 'showdown-katex';
 import hljs from 'highlight.js';
-import { AuthorInfo, AuthorInfoProps } from '../../../components/author-info/author-info';
-import { fetchFromApi } from '../../../utils/wp-api';
+import { fetchFromWpApi } from '../../../utils/wp-api';
 import { resolveAuthorName, toNormalDate } from '../../../utils/utils';
 import {
   TagListContainer,
   TagListContainerProps
 } from '../../../components/tag-list-container/tag-list-container';
 import Head from 'next/head';
+import { AuthorInfo, AuthorInfoProps } from '../../../components/author-info/author-info';
 
 type ArticleDetailProps = {
   title: string;
@@ -91,7 +91,7 @@ const allArticlesQuery = `
 }`;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const allArticles = (await fetchFromApi(allArticlesQuery)).posts.nodes;
+  const allArticles = (await fetchFromWpApi(allArticlesQuery)).posts.nodes;
   return {
     paths: allArticles.map((article) => ({
       params: { id: `${article.databaseId}` }
@@ -162,7 +162,7 @@ const converter = new Converter({
 });
 
 export const getStaticProps: GetStaticProps<ArticleDetailProps> = async ({ params }) => {
-  const result = (await fetchFromApi(articleDetailQuery, { id: params.id })).post;
+  const result = (await fetchFromWpApi(articleDetailQuery, { id: params.id })).post;
   const content = converter.makeHtml(result.markdown);
   return {
     props: {

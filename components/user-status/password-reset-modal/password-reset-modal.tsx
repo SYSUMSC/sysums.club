@@ -2,7 +2,7 @@ import styles from './password-reset-modal.module.scss';
 import React, { FC, FormEvent, useState } from 'react';
 import { useAsyncAction } from '../../../utils/utils';
 import { Form, Modal } from 'react-bootstrap';
-import { fetchApi } from '../../../utils/api';
+import { fetchFromApi } from '../../../utils/api';
 import { AsyncDataButton } from '../../shared/async-data-button/async-data-button';
 import { CheckOutlined } from '@ant-design/icons';
 
@@ -46,7 +46,7 @@ export const PasswordResetModal: FC<PasswordResetModalProps> = ({
             const dto: PasswordResetDto = { email, password, token };
             if (form.checkValidity()) {
               setRequesting(true);
-              fetchApi(
+              fetchFromApi(
                 'user/reset',
                 {
                   method: 'POST',
@@ -54,7 +54,10 @@ export const PasswordResetModal: FC<PasswordResetModalProps> = ({
                 },
                 true
               )
-                .then(() => setSuccess(true))
+                .then(() => {
+                  setSuccess(true);
+                  setTimeout(() => window.location.reload(), 3000);
+                })
                 .catch((error) => setErrorMessage(error.message))
                 .finally(() => {
                   setRequesting(false);
@@ -89,7 +92,7 @@ export const PasswordResetModal: FC<PasswordResetModalProps> = ({
               ) : (
                 <>
                   <CheckOutlined />
-                  重置成功
+                  重置成功，页面即将刷新
                 </>
               )}
             </AsyncDataButton>

@@ -1,12 +1,12 @@
 import { AppFrame } from '../../../components/frame';
 import styles from './[id].module.scss';
-import { AuthorInfo, AuthorInfoProps } from '../../../components/author-info/author-info';
 import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { ArticleListContainer } from '../../../components/article-list-container/article-list-container';
 import { ArticleCardProps } from '../../../components/article-card/article-card';
-import { fetchFromApi } from '../../../utils/wp-api';
+import { fetchFromWpApi } from '../../../utils/wp-api';
 import { resolveAuthorName, toNormalDate } from '../../../utils/utils';
+import { AuthorInfo, AuthorInfoProps } from '../../../components/author-info/author-info';
 
 type AuthorDetailProps = {
   authorInfo: AuthorInfoProps;
@@ -37,7 +37,7 @@ const allAuthorsQuery = `
 }`;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const allAuthors = (await fetchFromApi(allAuthorsQuery)).users.nodes;
+  const allAuthors = (await fetchFromWpApi(allAuthorsQuery)).users.nodes;
   return {
     paths: allAuthors.map((author) => ({
       params: { id: `${author.databaseId}` }
@@ -84,7 +84,7 @@ query AuthorQuery($id: ID!) {
 `;
 
 export const getStaticProps: GetStaticProps<AuthorDetailProps> = async ({ params }) => {
-  const result = (await fetchFromApi(authorInfoAndArticlesQuery, { id: params.id })).user;
+  const result = (await fetchFromWpApi(authorInfoAndArticlesQuery, { id: params.id })).user;
   return {
     props: {
       authorInfo: {

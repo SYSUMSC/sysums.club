@@ -1,7 +1,7 @@
 import React, { FC, FormEvent, useState } from 'react';
 import { useAsyncAction } from '../../../utils/utils';
 import { Form, Modal } from 'react-bootstrap';
-import { fetchApi } from '../../../utils/api';
+import { fetchFromApi } from '../../../utils/api';
 import styles from './register-modal.module.scss';
 import { AsyncDataButton } from '../../shared/async-data-button/async-data-button';
 
@@ -43,7 +43,7 @@ export const RegisterModal: FC<RegisterModalProps> = ({ showModal, onHide }) => 
             const dto: UserRegisterDto = { email, password, phoneNumber };
             if (form.checkValidity()) {
               setRegistering(true);
-              fetchApi<UserRegisterResponse>('user/register', {
+              fetchFromApi<UserRegisterResponse>('user/register', {
                 method: 'POST',
                 body: JSON.stringify(dto)
               })

@@ -2,13 +2,9 @@ import React, { FC } from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
 import styles from './frame.module.scss';
 import { UserStatus } from './user-status/user-status';
-import { WithSWRConfig } from '../utils/use-user';
 import { usePrimaryPath } from '../utils/utils';
 
-export const AppFrame: FC = ({ children }) =>
-  WithSWRConfig(<AppFrameContent children={children} />);
-
-const AppFrameContent: FC = ({ children }) => {
+export const AppFrame: FC = ({ children }) => {
   const primaryPath = usePrimaryPath();
   return (
     <div className={styles.rootContainer}>
@@ -31,7 +27,7 @@ const AppFrameContent: FC = ({ children }) => {
               <Nav.Link href="/blog">博客</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link href="/game">解密</Nav.Link>
+              <Nav.Link href="/puzzle">解密</Nav.Link>
             </Nav.Item>
           </Nav>
           <Navbar.Text className="ml-auto">

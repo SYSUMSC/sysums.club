@@ -1,7 +1,7 @@
 import React, { FC, FormEvent, useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import styles from './login-modal.module.scss';
-import { fetchApi } from '../../../utils/api';
+import { fetchFromApi } from '../../../utils/api';
 import { AsyncDataButton } from '../../shared/async-data-button/async-data-button';
 import { useAsyncAction } from '../../../utils/utils';
 
@@ -46,7 +46,7 @@ export const LoginModal: FC<LoginModalProps> = ({
             const dto: UserLoginDto = { email, password };
             if (form.checkValidity()) {
               setLoggingIn(true);
-              fetchApi<UserLoginResponse>('user/login', {
+              fetchFromApi<UserLoginResponse>('user/login', {
                 method: 'POST',
                 body: JSON.stringify(dto)
               })

@@ -12,7 +12,7 @@ import {
 } from '../../components/article-card-simple/article-card-simple';
 import { ArticleListContainer } from '../../components/article-list-container/article-list-container';
 import { GetStaticProps } from 'next';
-import { fetchFromApi } from '../../utils/wp-api';
+import { fetchFromWpApi } from '../../utils/wp-api';
 import { resolveAuthorName, toNormalDate } from '../../utils/utils';
 import { SearchOutlined, TeamOutlined } from '@ant-design/icons/lib';
 import { SearchBar } from '../../components/search-bar/search-bar';
@@ -124,7 +124,7 @@ const query = `
 }`;
 
 export const getStaticProps: GetStaticProps<BlogPageProps> = async () => {
-  const result = await fetchFromApi(query);
+  const result = await fetchFromWpApi(query);
   const pinnedArticles = result.pinnedArticles.nodes;
   const allArticles = result.allArticles.nodes;
   return {

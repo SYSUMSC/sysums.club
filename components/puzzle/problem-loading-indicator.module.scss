@@ -1,0 +1,17 @@
+@import 'components/theme-definition';
+
+.rootContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+
+  .textContainer {
+    color: $theme-text-color-white;
+
+    .icon {
+      padding-right: 12px;
+    }
+  }
+}

@@ -16,7 +16,7 @@ function makeApiPath(path: string) {
   return `/api/${path}`;
 }
 
-export async function fetchApi<T = void>(
+export async function fetchFromApi<T = void>(
   input: string,
   init?: RequestInit,
   emptyResponse = false

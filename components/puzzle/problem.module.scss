@@ -1,0 +1,27 @@
+@import 'components/theme-definition';
+
+.rootContainer {
+  padding: 12px 0;
+  color: $theme-text-color-grey-white;
+
+  .title {
+    color: $theme-text-color-white;
+    margin-bottom: 18px;
+
+    .index {
+      padding-right: 18px;
+    }
+  }
+
+  .problemDetailContainer {
+    margin-bottom: 32px;
+  }
+
+  .answerInput {
+    margin-bottom: 8px;
+  }
+
+  .submitButton {
+    float: right;
+  }
+}

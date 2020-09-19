@@ -4,7 +4,7 @@ import React from 'react';
 import { ArticleListContainer } from '../../../components/article-list-container/article-list-container';
 import { ArticleCardProps } from '../../../components/article-card/article-card';
 import styles from './[id].module.scss';
-import { fetchFromApi } from '../../../utils/wp-api';
+import { fetchFromWpApi } from '../../../utils/wp-api';
 import { resolveAuthorName, toNormalDate } from '../../../utils/utils';
 
 type TagDetailProps = {
@@ -36,7 +36,7 @@ const allTagsQuery = `
 }`;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const allTags = (await fetchFromApi(allTagsQuery)).tags.nodes;
+  const allTags = (await fetchFromWpApi(allTagsQuery)).tags.nodes;
   return {
     paths: allTags.map((tag) => ({
       params: { id: `${tag.databaseId}` }
@@ -84,7 +84,7 @@ query AuthorQuery($id: ID!) {
 `;
 
 export const getStaticProps: GetStaticProps<TagDetailProps> = async ({ params }) => {
-  const result = (await fetchFromApi(tagInfoAndArticlesQuery, { id: params.id })).tag;
+  const result = (await fetchFromWpApi(tagInfoAndArticlesQuery, { id: params.id })).tag;
   return {
     props: {
       name: result.name,
