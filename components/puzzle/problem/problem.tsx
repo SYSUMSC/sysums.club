@@ -38,16 +38,13 @@ export const Problem: FC<ProblemProps> = ({ id, title, contentHtml, script }) =>
   }, [id]);
   return (
     <div className={styles.rootContainer}>
-      <h3 className={styles.title}>
-        <Button
-          className={styles.goBackButton}
-          variant="outline-light"
-          onClick={() => router.push('/puzzle')}
-        >
+      <h3 className={styles.titleContainer}>
+        <Button variant="outline-light" onClick={() => router.push('/puzzle')}>
           返回
         </Button>
         {title}
       </h3>
+      <hr className={styles.divider} />
       {passed && <PassedIndicator />}
       {!passed && (
         <>
@@ -56,7 +53,8 @@ export const Problem: FC<ProblemProps> = ({ id, title, contentHtml, script }) =>
             className={styles.problemDetailContainer}
             dangerouslySetInnerHTML={{ __html: contentHtml }}
           />
-          <p>输入你的答案</p>
+          <hr className={styles.divider} />
+          <p className={styles.answerInputTitle}>你的答案</p>
           <InputGroup>
             <Form.Control
               className={styles.answerInput}
