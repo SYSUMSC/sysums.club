@@ -7,6 +7,7 @@ import { RegisterModal } from './register-modal/register-modal';
 import { PasswordResetRequestModal } from './password-reset-request-modal/password-reset-request-modal';
 import { useRouter } from 'next/router';
 import { PasswordResetModal } from './password-reset-modal/password-reset-modal';
+import { fetchFromApi } from '../../utils/api';
 
 export const UserStatus: FC = () => {
   const { query } = useRouter();
@@ -15,7 +16,7 @@ export const UserStatus: FC = () => {
   const [showPasswordResetRequestModal, setShowPasswordResetRequestModal] = useState(false);
   const [showPasswordResetModal, setShowPasswordResetModal] = useState(false);
   const [passwordResetQuery, setPasswordResetQuery] = useState({});
-  const { notLoggedIn, user, isLoading, isErrored } = useUser();
+  const { user, isLoading, isErrored } = useUser();
   useEffect(() => {
     if (query['email'] && query['token']) {
       setPasswordResetQuery({ ...query });
@@ -53,7 +54,7 @@ export const UserStatus: FC = () => {
           token={passwordResetQuery['token']}
         />
       )}
-      {notLoggedIn && !isLoading && (
+      {!user && !isLoading && (
         <>
           <span className={styles.textButton} onClick={() => setShowLoginModal(true)}>
             登录
@@ -69,10 +70,11 @@ export const UserStatus: FC = () => {
           <span>{user.email}</span>
           <span
             className={`${styles.textButton} ${styles.logoutButton}`}
-            onClick={() => {
-              localStorage.clear();
-              window.location.reload();
-            }}
+            onClick={() =>
+              fetchFromApi('user/logout', { method: 'POST' }, true).then(() =>
+                window.location.reload()
+              )
+            }
           >
             注销
           </span>

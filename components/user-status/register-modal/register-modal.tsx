@@ -4,6 +4,7 @@ import { Form, Modal } from 'react-bootstrap';
 import { fetchFromApi } from '../../../utils/api';
 import styles from './register-modal.module.scss';
 import { AsyncDataButton } from '../../shared/async-data-button/async-data-button';
+import { mutate } from 'swr';
 
 export type RegisterModalProps = {
   showModal: boolean;
@@ -43,13 +44,18 @@ export const RegisterModal: FC<RegisterModalProps> = ({ showModal, onHide }) => 
             const dto: UserRegisterDto = { email, password, phoneNumber };
             if (form.checkValidity()) {
               setRegistering(true);
-              fetchFromApi<UserRegisterResponse>('user/register', {
-                method: 'POST',
-                body: JSON.stringify(dto)
-              })
-                .then((response) => {
-                  localStorage.setItem('app_user_token', response.token);
+              fetchFromApi<UserRegisterResponse>(
+                'user/register',
+                {
+                  method: 'POST',
+                  body: JSON.stringify(dto)
+                },
+                true
+              )
+                .then(() => {
                   onHide();
+                  mutate('user/profile');
+                  mutate('puzzle/problem');
                 })
                 .catch((error) => setErrorMessage(error.message))
                 .finally(() => {

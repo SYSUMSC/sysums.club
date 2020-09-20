@@ -4,6 +4,7 @@ import styles from './login-modal.module.scss';
 import { fetchFromApi } from '../../../utils/api';
 import { AsyncDataButton } from '../../shared/async-data-button/async-data-button';
 import { useAsyncAction } from '../../../utils/utils';
+import { mutate } from 'swr';
 
 export type LoginModalProps = {
   showModal: boolean;
@@ -46,13 +47,18 @@ export const LoginModal: FC<LoginModalProps> = ({
             const dto: UserLoginDto = { email, password };
             if (form.checkValidity()) {
               setLoggingIn(true);
-              fetchFromApi<UserLoginResponse>('user/login', {
-                method: 'POST',
-                body: JSON.stringify(dto)
-              })
-                .then((response) => {
-                  localStorage.setItem('app_user_token', response.token);
+              fetchFromApi<UserLoginResponse>(
+                'user/login',
+                {
+                  method: 'POST',
+                  body: JSON.stringify(dto)
+                },
+                true
+              )
+                .then(() => {
                   onHide();
+                  mutate('user/profile');
+                  mutate('puzzle/problem');
                 })
                 .catch((error) => setErrorMessage(error.message))
                 .finally(() => {

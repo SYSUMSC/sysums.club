@@ -1,0 +1,25 @@
+@import 'components/theme-definition';
+
+.rootContainer {
+  color: $theme-text-color-grey-white;
+  padding: 32px 36px;
+  border-radius: 12px;
+  backdrop-filter: saturate(180%) blur(20px);
+  background-color: rgba($theme-color, 0.45);
+  @supports not ((backdrop-filter: saturate(180%)) and (backdrop-filter: blur(20px))) {
+    background-color: rgba($theme-color, 0.72) !important;
+  }
+
+  .title {
+    color: $theme-text-color-white;
+    margin-bottom: 18px;
+
+    .goBackButton {
+      margin-right: 12px;
+    }
+  }
+
+  .problemDetailContainer {
+    margin-bottom: 32px;
+  }
+}

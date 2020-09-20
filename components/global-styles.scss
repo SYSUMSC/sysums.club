@@ -16,9 +16,9 @@ a:active {
 
 .anticon {
   // https://github.com/ant-design/ant-design-icons/issues/7
-  // 但是在本项目中需要设置正值的0.125em才能对齐，而且在不同浏览器上显示效果依然有区别
+  // 但是在本项目中需要设置正值的0.1em才能对齐，而且在不同浏览器上显示效果依然有区别
   // 目前尚不清楚原因
-  vertical-align: 0.125em;
+  vertical-align: 0.1em;
 }
 
 button .anticon {
@@ -50,5 +50,14 @@ code {
 }
 
 p {
-  margin-bottom: 8px;
+  margin-bottom: 16px;
+}
+
+.btn-outline-light {
+  color: $theme-text-color-grey-white;
+
+  &:active,
+  &:hover {
+    color: $theme-color !important;
+  }
 }

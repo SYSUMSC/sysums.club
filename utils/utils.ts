@@ -32,13 +32,6 @@ export function usePrimaryPath() {
   return primaryPath;
 }
 
-export function useLocalStorageUpdate(key: string, listener: () => any) {
-  if (!process.browser) {
-    return;
-  }
-  useEffect(() => listener(), [localStorage.getItem(key)]);
-}
-
 export function useAsyncAction() {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>();

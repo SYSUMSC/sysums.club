@@ -1,0 +1,17 @@
+@import 'components/theme-definition';
+
+.container {
+  position: relative;
+  user-select: none;
+
+  .congratulation {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20%;
+    color: $theme-text-color-white;
+    text-align: center;
+    width: 100%;
+    text-shadow: 0 0 24px rgba(255, 255, 255, 0.3), 0 0 12px rgba(255, 255, 255, 0.5);
+  }
+}

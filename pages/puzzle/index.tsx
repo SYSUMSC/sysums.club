@@ -1,38 +1,38 @@
 import { AppFrame } from '../../components/frame';
 import React from 'react';
 import styles from './index.module.scss';
+import { ProblemLoadingIndicator } from '../../components/puzzle/problem-loading-indicator/problem-loading-indicator';
 import useSWR from 'swr';
-import { ProblemLoadingIndicator } from '../../components/puzzle/problem-loading-indicator';
-import { Problem } from '../../components/puzzle/problem';
 import { fetchFromApi } from '../../utils/api';
+import { PuzzleIndex } from '../../components/puzzle/puzzle-index/puzzle-index';
 
-export type GetPuzzleResponse = {
-  id: number;
-  title: string;
-  contentHtml: string;
-  script: string;
+export type GetPuzzleProblemsResponse = {
+  submissionsCount: number;
+  problems: {
+    id: number;
+    level: number;
+    title: string;
+    passed: boolean;
+  }[];
 };
 
-export default function PuzzlePage() {
-  const { data, error } = useSWR<GetPuzzleResponse>('puzzle', fetchFromApi);
+export default function PuzzleIndexPage() {
+  const { data, error } = useSWR<GetPuzzleProblemsResponse>('puzzle/problem', fetchFromApi, {
+    shouldRetryOnError: false
+  });
   return (
-    <AppFrame>
-      <title>解密 · SYSUMSC</title>
+    <AppFrame hideFooter={true}>
+      <title>解迷 · SYSUMSC</title>
       <div className={styles.rootContainer}>
         <div className={styles.centerContainer}>
           {!error && !data && <ProblemLoadingIndicator loading={true} />}
           {error && (
             <ProblemLoadingIndicator
-              errorMessage={error.statusCode === 401 ? '请登录再进行解迷' : error.message}
+              errorMessage={error.message === 'Unauthorized' ? '请先登录再进行解迷' : error.message}
             />
           )}
           {data && (
-            <Problem
-              id={data.id}
-              title={data.title}
-              contentHtml={data.contentHtml}
-              script={data.script}
-            />
+            <PuzzleIndex submissionsCount={data.submissionsCount} problems={data.problems} />
           )}
         </div>
       </div>
