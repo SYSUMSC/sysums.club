@@ -16,6 +16,7 @@ import { fetchFromWpApi } from '../../utils/wp-api';
 import { resolveAuthorName, toNormalDate } from '../../utils/utils';
 import { SearchOutlined, TeamOutlined } from '@ant-design/icons/lib';
 import { SearchBar } from '../../components/search-bar/search-bar';
+import Head from 'next/head';
 
 type BlogPageProps = {
   carouselArticles: ArticleCarouselProps;
@@ -27,7 +28,9 @@ export default function BlogPage({ carouselArticles, pinnedArticles, articles }:
   const [showingArticles, setShowingArticles] = useState(articles);
   return (
     <AppFrame>
-      <title>博客 · SYSUMSC</title>
+      <Head>
+        <title>博客 · SYSUMSC</title>
+      </Head>
       <div className={styles.rootContainer}>
         <div className={styles.selectedArticleContainer}>
           <div className={styles.articleCarouselWrapper}>

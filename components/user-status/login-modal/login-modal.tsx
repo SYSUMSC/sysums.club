@@ -56,12 +56,12 @@ export const LoginModal: FC<LoginModalProps> = ({
                 true
               )
                 .then(() => {
-                  onHide();
                   mutate('user/profile');
                   mutate('puzzle/problem');
+                  onHide();
                 })
-                .catch((error) => setErrorMessage(error.message))
-                .finally(() => {
+                .catch((error) => {
+                  setErrorMessage(error.message);
                   setLoggingIn(false);
                   setValidated(false);
                 });
@@ -96,14 +96,6 @@ export const LoginModal: FC<LoginModalProps> = ({
             >
               登录
             </AsyncDataButton>
-            <Button
-              variant="light"
-              type="button"
-              disabled={loggingIn}
-              onClick={onShowPasswordResetRequestButtonClick}
-            >
-              忘记密码
-            </Button>
           </div>
         </Form>
       </Modal.Body>

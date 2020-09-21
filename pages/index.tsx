@@ -2,16 +2,22 @@ import { AppFrame } from '../components/frame';
 import styles from './index.module.scss';
 import React from 'react';
 import { Carousel } from 'react-bootstrap';
+import Head from 'next/head';
 
 const carouselImageUrls = [
-  'https://sysumsc-website.oss-cn-shenzhen.aliyuncs.com/2020/08/1151596377469_.pic_hd-scaled.jpg',
-  'https://sysumsc-website.oss-cn-shenzhen.aliyuncs.com/2020/08/hackathon.png'
+  'https://sysumsc-website.oss-cn-shenzhen.aliyuncs.com/website-resource/carousel/1.jpg',
+  'https://sysumsc-website.oss-cn-shenzhen.aliyuncs.com/website-resource/carousel/2.jpg',
+  'https://sysumsc-website.oss-cn-shenzhen.aliyuncs.com/website-resource/carousel/3.jpg',
+  'https://sysumsc-website.oss-cn-shenzhen.aliyuncs.com/website-resource/carousel/4.png',
+  'https://sysumsc-website.oss-cn-shenzhen.aliyuncs.com/website-resource/carousel/5.png'
 ];
 
 export default function HomePage() {
   return (
     <AppFrame>
-      <title>首页 · SYSUMSC</title>
+      <Head>
+        <title>首页 · SYSUMSC</title>
+      </Head>
       <div className={styles.rootContainer}>
         <div className={styles.carouselContainer}>
           <Carousel indicators={false} controls={false}>
@@ -35,6 +41,16 @@ export default function HomePage() {
                 Club（缩写SYSUMSC)。在我们这里，你能结识到不少热衷于编程技术的伙伴，相互探讨、共同进步，还能获得来自
                 MSRA（微软亚洲研究院）导师的亲自指导，结识技术大牛，接触前沿技术，感受微软文化。我们每年都会有部员参加微软夏令营，优秀的部员更有
                 MSRA 实习内推机会。
+              </p>
+            </section>
+            <section className={styles.contentSection}>
+              <h4 className={styles.title}>我们的简史</h4>
+              <p className={styles.paragraph}>
+                本俱乐部于2002年6月由中山大学研究生会发起，并于同年在珠海校区成立分会，2006年3月成立东校区分会。现阶段总会在东校区，其他分会暂取消运作。
+                微软学生俱乐部实践空间站于2017年11月正式上线，目前有16个不同主题的项目供同学们研究，项目横跨AI、MR、Cloud&Cognitive
+                Service三大领域。
+                编程之美挑战赛是微软面对学生开展的大型编程比赛，迄今为止已经成功举办了六届，现已成为以解决挑战性问题为目标的代码高手切磋交流的平台。
+                微软学生夏令营从2000年开始，是MSRA学术合作部和亚太地区高校合作培养人才的成功实践。
               </p>
             </section>
             <section className={styles.contentSection}>

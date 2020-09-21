@@ -14,7 +14,13 @@ export type PuzzleIndexProps = {
   }[];
 };
 
-const PROBLEM_BUTTON_VARIANT_MAP = ['outline-info', 'outline-warning', 'outline-error'];
+const PROBLEM_BUTTON_VARIANT_MAP = {
+  [-1]: 'outline-info',
+  [0]: 'outline-info',
+  [1]: 'outline-warning',
+  [2]: 'outline-danger'
+};
+
 const SAYINGS = [
   '因世间的一切就像根链条；我们只需瞧见其中一环，就可知全体的性质。',
   '在没有得到任何证据的情况下是不能进行推理的，那样的话，只能是误入歧途。',

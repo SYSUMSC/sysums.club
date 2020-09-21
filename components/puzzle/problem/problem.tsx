@@ -11,7 +11,7 @@ export type ProblemProps = {
   id: number;
   title: string;
   contentHtml: string;
-  script: string;
+  script?: string;
 };
 
 type SubmitAnswerDto = {
@@ -31,9 +31,11 @@ export const Problem: FC<ProblemProps> = ({ id, title, contentHtml, script }) =>
   useEffect(() => {
     if (!passed) {
       window['PROBLEM_ID'] = id;
-      const scriptTag = document.createElement('script');
-      scriptTag.innerHTML = script;
-      instance.current.appendChild(scriptTag);
+      if (script) {
+        const scriptTag = document.createElement('script');
+        scriptTag.innerHTML = script;
+        instance.current.appendChild(scriptTag);
+      }
     }
   }, [id]);
   return (
@@ -42,13 +44,12 @@ export const Problem: FC<ProblemProps> = ({ id, title, contentHtml, script }) =>
         <Button variant="outline-light" onClick={() => router.push('/puzzle')}>
           返回
         </Button>
-        {title}
+        <span className={styles.title}>{title}</span>
       </h3>
       <hr className={styles.divider} />
       {passed && <PassedIndicator />}
       {!passed && (
-        <>
-          <div ref={instance} />
+        <div ref={instance}>
           <div
             className={styles.problemDetailContainer}
             dangerouslySetInnerHTML={{ __html: contentHtml }}
@@ -84,7 +85,7 @@ export const Problem: FC<ProblemProps> = ({ id, title, contentHtml, script }) =>
               </AsyncDataButton>
             </InputGroup.Append>
           </InputGroup>
-        </>
+        </div>
       )}
     </div>
   );

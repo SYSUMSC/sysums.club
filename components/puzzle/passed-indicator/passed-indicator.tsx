@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import styles from './passed-indicator.module.scss';
 import { Image } from 'react-bootstrap';
 
@@ -8,7 +8,8 @@ const IMAGE_URLS = [
 ];
 
 export const PassedIndicator: FC = () => {
-  const [imgSrc] = useState(IMAGE_URLS[Math.floor(Math.random() * IMAGE_URLS.length)]);
+  const [imgSrc, setImgSrc] = useState<string>();
+  useEffect(() => setImgSrc(IMAGE_URLS[Math.floor(Math.random() * IMAGE_URLS.length)]), []);
   return (
     <div className={styles.container}>
       <Image alt="Problem Solved" src={imgSrc} draggable={false} fluid />

@@ -5,6 +5,7 @@ import { ProblemLoadingIndicator } from '../../components/puzzle/problem-loading
 import useSWR from 'swr';
 import { fetchFromApi } from '../../utils/api';
 import { PuzzleIndex } from '../../components/puzzle/puzzle-index/puzzle-index';
+import Head from 'next/head';
 
 export type GetPuzzleProblemsResponse = {
   submissionsCount: number;
@@ -22,7 +23,9 @@ export default function PuzzleIndexPage() {
   });
   return (
     <AppFrame hideFooter={true}>
-      <title>解迷 · SYSUMSC</title>
+      <Head>
+        <title>解迷 · SYSUMSC</title>
+      </Head>
       <div className={styles.rootContainer}>
         <div className={styles.centerContainer}>
           {!error && !data && <ProblemLoadingIndicator loading={true} />}

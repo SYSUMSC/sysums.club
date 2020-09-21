@@ -3,5 +3,6 @@ COPY . /app
 RUN cd /app && \
     npm install && \
     npm run build
+WORKDIR /app
 EXPOSE 3000
-CMD cd /app && npm start
+CMD ["npm", "start"]

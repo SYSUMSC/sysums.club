@@ -7,6 +7,7 @@ import { ArticleCardProps } from '../../../components/article-card/article-card'
 import { fetchFromWpApi } from '../../../utils/wp-api';
 import { resolveAuthorName, toNormalDate } from '../../../utils/utils';
 import { AuthorInfo, AuthorInfoProps } from '../../../components/author-info/author-info';
+import Head from 'next/head';
 
 type AuthorDetailProps = {
   authorInfo: AuthorInfoProps;
@@ -16,7 +17,9 @@ type AuthorDetailProps = {
 export default function AuthorDetail({ authorInfo, articles }: AuthorDetailProps) {
   return (
     <AppFrame>
-      <title>{authorInfo.name} · 博客 · SYSUMSC</title>
+      <Head>
+        <title>{authorInfo.name} · 博客 · SYSUMSC</title>
+      </Head>
       <div className={styles.rootContainer}>
         <section className={styles.authorInfoContainer}>
           <AuthorInfo {...authorInfo} />

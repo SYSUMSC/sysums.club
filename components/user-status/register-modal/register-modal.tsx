@@ -53,12 +53,12 @@ export const RegisterModal: FC<RegisterModalProps> = ({ showModal, onHide }) => 
                 true
               )
                 .then(() => {
-                  onHide();
                   mutate('user/profile');
                   mutate('puzzle/problem');
+                  onHide();
                 })
-                .catch((error) => setErrorMessage(error.message))
-                .finally(() => {
+                .catch((error) => {
+                  setErrorMessage(error.message);
                   setRegistering(false);
                   setValidated(false);
                 });

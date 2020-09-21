@@ -6,6 +6,7 @@ import { ArticleCardProps } from '../../../components/article-card/article-card'
 import styles from './[id].module.scss';
 import { fetchFromWpApi } from '../../../utils/wp-api';
 import { resolveAuthorName, toNormalDate } from '../../../utils/utils';
+import Head from 'next/head';
 
 type TagDetailProps = {
   name: string;
@@ -16,7 +17,9 @@ type TagDetailProps = {
 export default function TagDetail({ name, description, articles }: TagDetailProps) {
   return (
     <AppFrame>
-      <title>{name} · 博客 · SYSUMSC</title>
+      <Head>
+        <title>{name} · 博客 · SYSUMSC</title>
+      </Head>
       <div className={styles.rootContainer}>
         <h3 className={styles.title}>标签: {name}</h3>
         <p className={styles.description}>{description}</p>

@@ -6,6 +6,7 @@ import { ProblemLoadingIndicator } from '../../../components/puzzle/problem-load
 import { fetchFromApi } from '../../../utils/api';
 import { useRouter } from 'next/router';
 import { Problem } from '../../../components/puzzle/problem/problem';
+import Head from 'next/head';
 
 export type GetProblemDetailResponse = {
   id: number;
@@ -25,7 +26,9 @@ export default function PuzzlePage() {
   );
   return (
     <AppFrame hideFooter={true}>
-      <title>{data?.title ? `${data.title} · ` : ''}解迷 · SYSUMSC</title>
+      <Head>
+        <title>{data?.title ? `${data.title} · ` : ''}解迷 · SYSUMSC</title>
+      </Head>
       <div className={styles.rootContainer}>
         <div className={styles.centerContainer}>
           {!error && !data && <ProblemLoadingIndicator loading={true} />}

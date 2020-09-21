@@ -3,22 +3,30 @@
 .rootContainer {
   color: $theme-text-color-grey-white;
   padding: 32px 36px;
+  margin-bottom: 80px;
   border-radius: 12px;
   backdrop-filter: saturate(180%) blur(20px);
   background-color: rgba($theme-color, 0.45);
   @supports not ((backdrop-filter: saturate(180%)) and (backdrop-filter: blur(20px))) {
     background-color: rgba($theme-color, 0.72) !important;
   }
+  min-width: 480px;
+  max-width: 900px;
 
   .titleContainer {
     color: $theme-text-color-white;
     margin-bottom: 18px;
     display: flex;
     justify-content: space-between;
+
+    .title {
+      margin-left: 24px;
+    }
   }
 
   .problemDetailContainer {
     margin-bottom: 32px;
+    color: $theme-text-color-grey-white;
   }
 
   .divider {
