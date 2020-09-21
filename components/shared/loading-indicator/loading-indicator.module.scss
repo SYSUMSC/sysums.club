@@ -1,0 +1,13 @@
+@import 'components/theme-definition';
+
+.container {
+  flex-grow: 1;
+  background-color: $theme-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .indicator {
+    color: $theme-text-color-white;
+  }
+}

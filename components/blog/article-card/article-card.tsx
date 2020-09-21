@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styles from './article-card.module.scss';
-import { Badge, Card } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import { ArticleMeta, ArticleMetaProps } from '../article-meta/article-meta';
 import { TagListContainer } from '../tag-list-container/tag-list-container';

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Image } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import styles from './[id].module.scss';
-import { ArticleMeta, ArticleMetaProps } from '../../../components/article-meta/article-meta';
+import { ArticleMeta, ArticleMetaProps } from '../../../components/blog/article-meta/article-meta';
 import { AppFrame } from '../../../components/frame';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { Converter } from 'showdown';
@@ -13,9 +13,10 @@ import { resolveAuthorName, toNormalDate } from '../../../utils/utils';
 import {
   TagListContainer,
   TagListContainerProps
-} from '../../../components/tag-list-container/tag-list-container';
+} from '../../../components/blog/tag-list-container/tag-list-container';
 import Head from 'next/head';
-import { AuthorInfo, AuthorInfoProps } from '../../../components/author-info/author-info';
+import { AuthorInfo, AuthorInfoProps } from '../../../components/blog/author-info/author-info';
+import { LoadingIndicator } from '../../../components/shared/loading-indicator/loading-indicator';
 
 type ArticleDetailProps = {
   title: string;
@@ -47,36 +48,48 @@ export default function ArticleDetail({
   const [zoomedInImage, setZoomedInImage] = useState<string>(null);
   return (
     <AppFrame>
-      <Head>
-        <title>{title} · 博客 · SYSUMSC</title>
-      </Head>
-      {zoomedInImage && (
-        <div className={styles.imageOverlay} onClick={() => setZoomedInImage(null)}>
-          <Image src={zoomedInImage} fluid />
-        </div>
+      {router.isFallback && (
+        <>
+          <Head>
+            <title>加载中 · 博客 · SYSUMSC</title>
+          </Head>
+          <LoadingIndicator />
+        </>
       )}
-      <main className={styles.rootContainer}>
-        <article className={styles.article}>
-          <header className={styles.header}>
-            <h1>{title}</h1>
-            <ArticleMeta {...meta} />
-            <Image className={styles.thumbnail} src={thumbnailUrl} fluid />
-            <p className={styles.summary}>{summary}</p>
-          </header>
-          <section
-            ref={articleSectionRef}
-            className={`markdown-body ${styles.articleSection}`}
-            dangerouslySetInnerHTML={{ __html: content }}
-            onClick={(event) => {
-              if (event.target instanceof HTMLImageElement) {
-                setZoomedInImage(event.target.src);
-              }
-            }}
-          />
-        </article>
-        <TagListContainer {...tagList} />
-        <AuthorInfo {...authorInfo} />
-      </main>
+      {!router.isFallback && (
+        <>
+          <Head>
+            <title>{title} · 博客 · SYSUMSC</title>
+          </Head>
+          {zoomedInImage && (
+            <div className={styles.imageOverlay} onClick={() => setZoomedInImage(null)}>
+              <Image src={zoomedInImage} fluid />
+            </div>
+          )}
+          <main className={styles.rootContainer}>
+            <article className={styles.article}>
+              <header className={styles.header}>
+                <h1>{title}</h1>
+                <ArticleMeta {...meta} />
+                <Image className={styles.thumbnail} src={thumbnailUrl} fluid />
+                <p className={styles.summary}>{summary}</p>
+              </header>
+              <section
+                ref={articleSectionRef}
+                className={`markdown-body ${styles.articleSection}`}
+                dangerouslySetInnerHTML={{ __html: content }}
+                onClick={(event) => {
+                  if (event.target instanceof HTMLImageElement) {
+                    setZoomedInImage(event.target.src);
+                  }
+                }}
+              />
+            </article>
+            <TagListContainer {...tagList} />
+            <AuthorInfo {...authorInfo} />
+          </main>
+        </>
+      )}
     </AppFrame>
   );
 }
@@ -96,7 +109,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths: allArticles.map((article) => ({
       params: { id: `${article.databaseId}` }
     })),
-    fallback: false
+    fallback: true
   };
 };
 
@@ -165,6 +178,7 @@ export const getStaticProps: GetStaticProps<ArticleDetailProps> = async ({ param
   const result = (await fetchFromWpApi(articleDetailQuery, { id: params.id })).post;
   const content = converter.makeHtml(result.markdown);
   return {
+    unstable_revalidate: 10,
     props: {
       title: result.title,
       meta: {

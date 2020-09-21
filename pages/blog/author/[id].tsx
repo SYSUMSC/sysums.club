@@ -2,12 +2,14 @@ import { AppFrame } from '../../../components/frame';
 import styles from './[id].module.scss';
 import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { ArticleListContainer } from '../../../components/article-list-container/article-list-container';
-import { ArticleCardProps } from '../../../components/article-card/article-card';
+import { ArticleListContainer } from '../../../components/blog/article-list-container/article-list-container';
+import { ArticleCardProps } from '../../../components/blog/article-card/article-card';
 import { fetchFromWpApi } from '../../../utils/wp-api';
 import { resolveAuthorName, toNormalDate } from '../../../utils/utils';
-import { AuthorInfo, AuthorInfoProps } from '../../../components/author-info/author-info';
+import { AuthorInfo, AuthorInfoProps } from '../../../components/blog/author-info/author-info';
 import Head from 'next/head';
+import { LoadingIndicator } from '../../../components/shared/loading-indicator/loading-indicator';
+import { useRouter } from 'next/router';
 
 type AuthorDetailProps = {
   authorInfo: AuthorInfoProps;
@@ -15,17 +17,30 @@ type AuthorDetailProps = {
 };
 
 export default function AuthorDetail({ authorInfo, articles }: AuthorDetailProps) {
+  const router = useRouter();
   return (
     <AppFrame>
-      <Head>
-        <title>{authorInfo.name} · 博客 · SYSUMSC</title>
-      </Head>
-      <div className={styles.rootContainer}>
-        <section className={styles.authorInfoContainer}>
-          <AuthorInfo {...authorInfo} />
-        </section>
-        <ArticleListContainer cardProps={articles} />
-      </div>
+      {router.isFallback && (
+        <>
+          <Head>
+            <title>加载中 · 博客 · SYSUMSC</title>
+          </Head>
+          <LoadingIndicator />
+        </>
+      )}
+      {!router.isFallback && (
+        <>
+          <Head>
+            <title>{authorInfo.name} · 博客 · SYSUMSC</title>
+          </Head>
+          <div className={styles.rootContainer}>
+            <section className={styles.authorInfoContainer}>
+              <AuthorInfo {...authorInfo} />
+            </section>
+            <ArticleListContainer cardProps={articles} />
+          </div>
+        </>
+      )}
     </AppFrame>
   );
 }
@@ -45,7 +60,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths: allAuthors.map((author) => ({
       params: { id: `${author.databaseId}` }
     })),
-    fallback: false
+    fallback: true
   };
 };
 
@@ -89,6 +104,7 @@ query AuthorQuery($id: ID!) {
 export const getStaticProps: GetStaticProps<AuthorDetailProps> = async ({ params }) => {
   const result = (await fetchFromWpApi(authorInfoAndArticlesQuery, { id: params.id })).user;
   return {
+    unstable_revalidate: 10,
     props: {
       authorInfo: {
         authorId: result.databaseId,

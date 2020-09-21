@@ -1,22 +1,22 @@
 import { AppFrame } from '../../components/frame';
-import { ArticleCardProps } from '../../components/article-card/article-card';
+import { ArticleCardProps } from '../../components/blog/article-card/article-card';
 import styles from './index.module.scss';
 import React, { useState } from 'react';
 import {
-  ArticleCarousel,
-  ArticleCarouselProps
-} from '../../components/article-carousel/article-carousel';
-import {
   ArticleCardSimple,
   ArticleCardSimpleProps
-} from '../../components/article-card-simple/article-card-simple';
-import { ArticleListContainer } from '../../components/article-list-container/article-list-container';
+} from '../../components/blog/article-card-simple/article-card-simple';
+import { ArticleListContainer } from '../../components/blog/article-list-container/article-list-container';
 import { GetStaticProps } from 'next';
 import { fetchFromWpApi } from '../../utils/wp-api';
 import { resolveAuthorName, toNormalDate } from '../../utils/utils';
 import { SearchOutlined, TeamOutlined } from '@ant-design/icons/lib';
-import { SearchBar } from '../../components/search-bar/search-bar';
+import { SearchBar } from '../../components/blog/search-bar/search-bar';
 import Head from 'next/head';
+import {
+  ArticleCarousel,
+  ArticleCarouselProps
+} from '../../components/blog/article-carousel/article-carousel';
 
 type BlogPageProps = {
   carouselArticles: ArticleCarouselProps;
@@ -131,6 +131,7 @@ export const getStaticProps: GetStaticProps<BlogPageProps> = async () => {
   const pinnedArticles = result.pinnedArticles.nodes;
   const allArticles = result.allArticles.nodes;
   return {
+    unstable_revalidate: 10,
     props: {
       carouselArticles: {
         articles: pinnedArticles.map((article) => ({

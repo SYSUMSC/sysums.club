@@ -1,8 +1,8 @@
 import { AppFrame } from '../../../components/frame';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import React from 'react';
-import { ArticleListContainer } from '../../../components/article-list-container/article-list-container';
-import { ArticleCardProps } from '../../../components/article-card/article-card';
+import { ArticleListContainer } from '../../../components/blog/article-list-container/article-list-container';
+import { ArticleCardProps } from '../../../components/blog/article-card/article-card';
 import styles from './[id].module.scss';
 import { fetchFromWpApi } from '../../../utils/wp-api';
 import { resolveAuthorName, toNormalDate } from '../../../utils/utils';
