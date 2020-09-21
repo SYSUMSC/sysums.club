@@ -10,7 +10,6 @@
   @supports not ((backdrop-filter: saturate(180%)) and (backdrop-filter: blur(20px))) {
     background-color: rgba($theme-color, 0.72) !important;
   }
-  min-width: 480px;
   max-width: 900px;
 
   .titleContainer {
