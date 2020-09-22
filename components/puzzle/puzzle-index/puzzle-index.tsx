@@ -35,10 +35,10 @@ export const PuzzleIndex: FC<PuzzleIndexProps> = ({ submissionsCount, problems }
   return (
     <div className={styles.rootContainer}>
       <h3 className={styles.title}>SYSUMSC 解迷游戏</h3>
-      <p className={styles.sayingContainer}>
+      <div className={styles.sayingContainer}>
         <p className={styles.saying}>{saying}</p>
-      </p>
-      <p className={styles.problemsContainer}>
+      </div>
+      <div className={styles.problemsContainer}>
         <p className={styles.info}>
           你的谜题 ({problems.filter((p) => p.passed).length} / {problems.length})
         </p>
@@ -53,7 +53,7 @@ export const PuzzleIndex: FC<PuzzleIndexProps> = ({ submissionsCount, problems }
             {p.title}
           </Button>
         ))}
-      </p>
+      </div>
       <p className={styles.submissionCount}>全体解迷者累计提交答案次数: {submissionsCount}</p>
       <p className={styles.version}>2020.9.20 SYSUMSC</p>
     </div>

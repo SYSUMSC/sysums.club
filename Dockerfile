@@ -5,4 +5,4 @@ RUN cd /app && \
     npm run build
 WORKDIR /app
 EXPOSE 3000
-CMD ["npm", "start"]
+ENTRYPOINT ["npm", "start"]

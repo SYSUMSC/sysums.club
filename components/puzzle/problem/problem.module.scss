@@ -10,13 +10,17 @@
   @supports not ((backdrop-filter: saturate(180%)) and (backdrop-filter: blur(20px))) {
     background-color: rgba($theme-color, 0.72) !important;
   }
-  max-width: 900px;
+  max-width: 800px;
+  @media (min-width: $mdGap) {
+    min-width: 450px;
+  }
 
   .titleContainer {
     color: $theme-text-color-white;
     margin-bottom: 18px;
     display: flex;
     justify-content: space-between;
+    word-break: break-all;
 
     .title {
       margin-left: 24px;

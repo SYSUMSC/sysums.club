@@ -96,6 +96,14 @@ export const LoginModal: FC<LoginModalProps> = ({
             >
               登录
             </AsyncDataButton>
+            <Button
+              variant="light"
+              type="button"
+              disabled={loggingIn}
+              onClick={onShowPasswordResetRequestButtonClick}
+            >
+              忘记密码
+            </Button>
           </div>
         </Form>
       </Modal.Body>
