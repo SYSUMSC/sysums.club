@@ -73,7 +73,7 @@ export const UserStatus: FC = () => {
             className={`${styles.textButton} ${styles.logoutButton}`}
             onClick={() =>
               fetchFromApi('user/logout', { method: 'POST' }, true).then(() =>
-                window.location.reload()
+                window.location.href = '/'
               )
             }
           >
