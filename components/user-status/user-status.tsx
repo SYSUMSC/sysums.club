@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import styles from './user-status.module.scss';
 import { useUser } from '../../utils/use-user';
 import { LoginModal } from './login-modal/login-modal';
-import { LoadingOutlined, WarningOutlined } from '@ant-design/icons';
+import { LoadingOutlined, UserOutlined, WarningOutlined } from '@ant-design/icons';
 import { RegisterModal } from './register-modal/register-modal';
 import { PasswordResetRequestModal } from './password-reset-request-modal/password-reset-request-modal';
 import { useRouter } from 'next/router';
@@ -67,6 +67,7 @@ export const UserStatus: FC = () => {
       )}
       {user && (
         <>
+          <UserOutlined className={styles.userIcon} />
           <span>{user.name}</span>
           <span
             className={`${styles.textButton} ${styles.logoutButton}`}
