@@ -1,0 +1,42 @@
+@import 'components/theme-definition';
+
+$card-transition-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+
+.container {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.75);
+  will-change: box-shadow, border, transform;
+  transition: box-shadow 0.3s $card-transition-timing-function,
+    border 0.3s $card-transition-timing-function, transform 0.3s $card-transition-timing-function;
+
+  &:hover,
+  &:active {
+    border: 1px solid $theme-text-color-white;
+    box-shadow: 0 2px 24px rgba(255, 255, 255, 0.25), 0 0 64px rgba(255, 255, 255, 0.15);
+    transform: scale(1.3);
+    @media (min-width: $lgGap) {
+      transform: scale(1.5);
+    }
+    @media (min-width: $mdGap) {
+      transform: scale(1.4);
+    }
+  }
+
+  .cover {
+    display: block;
+    user-select: none;
+    width: auto;
+    height: auto;
+    max-height: 460px;
+    cursor: pointer;
+
+    @media (min-width: $lgGap) {
+      max-height: 520px;
+    }
+  }
+
+  @media (max-width: $smGap) {
+    margin: 128px 0;
+  }
+}

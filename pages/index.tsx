@@ -37,10 +37,11 @@ export default function HomePage() {
             <section className={styles.contentSection}>
               <h4 className={styles.title}>我们是谁</h4>
               <p className={styles.paragraph}>
-                我们是来自中山大学广州东校区的技术类社团MS
+                我们是来自中山大学的技术类社团MS
                 Club（缩写SYSUMSC)。在我们这里，你能结识到不少热衷于编程技术的伙伴，相互探讨、共同进步，还能获得来自
                 MSRA（微软亚洲研究院）导师的亲自指导，结识技术大牛，接触前沿技术，感受微软文化。我们每年都会有部员参加微软夏令营，优秀的部员更有
-                MSRA 实习内推机会。
+                MSRA
+                实习内推机会。如果你对技术感兴趣、对微软感兴趣，对融洽的社团氛围感到向往，那么这里将不容错过。
               </p>
             </section>
             <section className={styles.contentSection}>
@@ -78,7 +79,7 @@ export default function HomePage() {
               <figure className={styles.imageContainer}>
                 <img
                   className={styles.image}
-                  src="https://wp.sysums.club/wp-content/uploads/2020/08/test-scaled.jpg"
+                  src="https://sysumsc-website.oss-cn-shenzhen.aliyuncs.com/website-resource/tech-share.jpg"
                   alt="技术分享的图片"
                 />
                 <figcaption className={styles.caption}>
@@ -89,7 +90,7 @@ export default function HomePage() {
               <figure className={styles.imageContainer}>
                 <img
                   className={styles.image}
-                  src="https://wp.sysums.club/wp-content/uploads/2020/08/hackathon.png"
+                  src="https://sysumsc-website.oss-cn-shenzhen.aliyuncs.com/website-resource/hackathon.png"
                   alt="黑客松的图片"
                 />
                 <figcaption className={styles.caption}>
@@ -100,7 +101,7 @@ export default function HomePage() {
               <figure className={styles.imageContainer}>
                 <img
                   className={styles.image}
-                  src="https://wp.sysums.club/wp-content/uploads/2020/08/tb.png"
+                  src="https://sysumsc-website.oss-cn-shenzhen.aliyuncs.com/website-resource/team-build.png"
                   alt="团建的图片"
                 />
                 <figcaption className={styles.caption}>
