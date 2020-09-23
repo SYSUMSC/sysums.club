@@ -48,7 +48,10 @@ export const PasswordResetRequestModal: FC<PasswordResetRequestModalProps> = ({
                 },
                 true
               )
-                .then(() => setSuccess(true))
+                .then(() => {
+                  setErrorMessage('');
+                  setSuccess(true);
+                })
                 .catch((error) => setErrorMessage(error.message))
                 .finally(() => {
                   setRequesting(false);

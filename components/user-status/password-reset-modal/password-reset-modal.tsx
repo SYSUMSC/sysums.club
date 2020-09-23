@@ -55,6 +55,7 @@ export const PasswordResetModal: FC<PasswordResetModalProps> = ({
                 true
               )
                 .then(() => {
+                  setErrorMessage('');
                   setSuccess(true);
                   setTimeout(() => window.location.reload(), 3000);
                 })

@@ -22,7 +22,7 @@ export const UserStatus: FC = () => {
       setPasswordResetQuery({ ...query });
       setShowPasswordResetModal(true);
     }
-  }, []);
+  }, [query]);
   return (
     <>
       {isLoading && <LoadingOutlined />}
