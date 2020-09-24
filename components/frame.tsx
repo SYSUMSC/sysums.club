@@ -60,7 +60,7 @@ export const AppFrame: FC<AppFrameProps> = ({ children, hideFooter }) => {
                 <h5 className={styles.title}>联系方式</h5>
                 <ul className={styles.list}>
                   <li>
-                    <a href="https://jq.qq.com/?_wv=1027&k=5vLnXPJ" rel="noopener" target="_blank">
+                    <a href="https://jq.qq.com/?_wv=1027&k=MFjOBmdG" rel="noopener" target="_blank">
                       迎新群
                     </a>
                   </li>
@@ -74,8 +74,8 @@ export const AppFrame: FC<AppFrameProps> = ({ children, hideFooter }) => {
                     </a>
                   </li>
                   <li>
-                    <a href="mailto:admin@sysums.club" target="_blank">
-                      admin@sysums.club
+                    <a href="mailto:darkyzhou@sysums.club" target="_blank">
+                      darkyzhou@sysums.club
                     </a>
                   </li>
                 </ul>
