@@ -55,6 +55,7 @@ export const PuzzleIndex: FC<PuzzleIndexProps> = ({ submissionsCount, problems }
         ))}
       </div>
       <p className={styles.submissionCount}>全体解迷者累计提交答案次数: {submissionsCount}</p>
+      <p className={styles.thanks}>特别鸣谢: @GZTime</p>
       <p className={styles.version}>2020.9.20 SYSUMSC</p>
     </div>
   );
