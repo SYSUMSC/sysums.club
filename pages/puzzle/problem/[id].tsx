@@ -27,7 +27,7 @@ export default function PuzzlePage() {
   return (
     <AppFrame hideFooter={true}>
       <Head>
-        <title>{data?.title ? `${data.title} · ` : ''}解迷 · SYSUMSC</title>
+        <title>{data?.title ? `${data.title} · ` : ''}解谜 · SYSUMSC</title>
       </Head>
       <div className={styles.rootContainer}>
         <div className={styles.centerContainer}>
