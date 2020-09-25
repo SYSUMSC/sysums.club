@@ -24,14 +24,14 @@ export default function PuzzleIndexPage() {
   return (
     <AppFrame hideFooter={true}>
       <Head>
-        <title>解迷 · SYSUMSC</title>
+        <title>解谜 · SYSUMSC</title>
       </Head>
       <div className={styles.rootContainer}>
         <div className={styles.centerContainer}>
           {!error && !data && <ProblemLoadingIndicator loading={true} />}
           {error && (
             <ProblemLoadingIndicator
-              errorMessage={error.message === 'Unauthorized' ? '请先登录再进行解迷' : error.message}
+              errorMessage={error.message === 'Unauthorized' ? '请先登录再进行解谜' : error.message}
             />
           )}
           {data && (
