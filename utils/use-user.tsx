@@ -3,7 +3,6 @@ import { fetchFromApi } from './api';
 
 export type User = {
   email: string;
-  name: string;
   phone_number: string;
 };
 

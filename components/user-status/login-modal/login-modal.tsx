@@ -58,6 +58,7 @@ export const LoginModal: FC<LoginModalProps> = ({
                 .then(() => {
                   mutate('user/profile');
                   mutate('puzzle/problem');
+                  mutate('recruit');
                   onHide();
                 })
                 .catch((error) => {

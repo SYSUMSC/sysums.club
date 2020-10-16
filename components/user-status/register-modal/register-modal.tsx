@@ -14,8 +14,6 @@ export type RegisterModalProps = {
 interface UserRegisterDto {
   email: string;
   password: string;
-  phoneNumber: string;
-  name: string;
 }
 
 interface UserRegisterResponse {
@@ -26,8 +24,6 @@ export const RegisterModal: FC<RegisterModalProps> = ({ showModal, onHide }) => 
   const [validated, setValidated] = useState(false);
   const [registering, setRegistering, errorMessage, setErrorMessage] = useAsyncAction();
   const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   return (
     <Modal show={showModal} onHide={onHide} backdrop="static" keyboard={false}>
@@ -43,7 +39,7 @@ export const RegisterModal: FC<RegisterModalProps> = ({ showModal, onHide }) => 
             event.preventDefault();
             event.stopPropagation();
             setValidated(true);
-            const dto: UserRegisterDto = { email, password, phoneNumber, name };
+            const dto: UserRegisterDto = { email, password };
             if (form.checkValidity()) {
               setRegistering(true);
               fetchFromApi<UserRegisterResponse>(
@@ -77,31 +73,6 @@ export const RegisterModal: FC<RegisterModalProps> = ({ showModal, onHide }) => 
               disabled={registering}
             />
             <Form.Text muted>邮箱地址主要用于找回密码、面试结果通知等</Form.Text>
-          </Form.Group>
-          <Form.Group controlId="name">
-            <Form.Label>姓名</Form.Label>
-            <Form.Control
-              required
-              type="text"
-              value={name}
-              onChange={(event) => setName(event.target.value)}
-              disabled={registering}
-            />
-            <Form.Text muted>将用于面试信息收集等，不会公开，请务必填写真实姓名</Form.Text>
-          </Form.Group>
-          <Form.Group controlId="phoneNumber">
-            <Form.Label>手机号码</Form.Label>
-            <Form.Control
-              required
-              type="tel"
-              value={phoneNumber}
-              onChange={(event) => setPhoneNumber(event.target.value)}
-              disabled={registering}
-            />
-            <Form.Text muted>手机号码主要用于各阶段面试的通知</Form.Text>
-            <Form.Text muted>
-              目前仅支持内地手机号，若有困难建议填写舍友或亲朋的内地手机号
-            </Form.Text>
           </Form.Group>
           <Form.Group controlId="password">
             <Form.Label>密码</Form.Label>

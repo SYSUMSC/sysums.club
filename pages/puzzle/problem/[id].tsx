@@ -2,7 +2,7 @@ import { AppFrame } from '../../../components/frame';
 import React from 'react';
 import styles from './[id].module.scss';
 import useSWR from 'swr';
-import { ProblemLoadingIndicator } from '../../../components/puzzle/problem-loading-indicator/problem-loading-indicator';
+import { LoadingIndicatorWithMessage } from '../../../components/shared/loading-indicator-with-message/loading-indicator-with-message';
 import { fetchFromApi } from '../../../utils/api';
 import { useRouter } from 'next/router';
 import { Problem } from '../../../components/puzzle/problem/problem';
@@ -31,9 +31,9 @@ export default function PuzzlePage() {
       </Head>
       <div className={styles.rootContainer}>
         <div className={styles.centerContainer}>
-          {!error && !data && <ProblemLoadingIndicator loading={true} />}
+          {!error && !data && <LoadingIndicatorWithMessage loading={true} />}
           {error && (
-            <ProblemLoadingIndicator
+            <LoadingIndicatorWithMessage
               errorMessage={error.message === 'Unauthorized' ? '请先登录再进行解迷' : error.message}
             />
           )}

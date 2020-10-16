@@ -22,7 +22,7 @@ export const AsyncDataButton: FC<AsyncDataButtonProps> = (props) => {
         {isLoading && <LoadingOutlined />}
         {props.children}
       </Button>
-      <Overlay target={target.current} show={!!errorMessage} placement="bottom">
+      <Overlay target={target.current} show={!!errorMessage} placement="top">
         {(props) => (
           <Tooltip id="async-data-button-overlay" {...props}>
             {errorMessage}

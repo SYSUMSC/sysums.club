@@ -68,7 +68,7 @@ export const UserStatus: FC = () => {
       {user && (
         <>
           <UserOutlined className={styles.userIcon} />
-          <span>{user.name}</span>
+          <span>{user.email}</span>
           <span
             className={`${styles.textButton} ${styles.logoutButton}`}
             onClick={() =>

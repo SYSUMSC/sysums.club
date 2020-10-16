@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
-import styles from './problem-loading-indicator.module.scss';
+import styles from './loading-indicator-with-message.module.scss';
 import { FrownOutlined, LoadingOutlined } from '@ant-design/icons';
 
-export type ProblemLoadingIndicatorProps = {
+export type LoadingIndicatorWithMessageProps = {
   loading?: boolean;
   errorMessage?: string;
 };
 
-export const ProblemLoadingIndicator: FC<ProblemLoadingIndicatorProps> = ({
+export const LoadingIndicatorWithMessage: FC<LoadingIndicatorWithMessageProps> = ({
   loading,
   errorMessage
 }) => (
