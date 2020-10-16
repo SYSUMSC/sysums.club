@@ -6,7 +6,7 @@ import { JournalCard } from '../../components/journal/journal-card/journal-card'
 
 export default function JournalIndexPage() {
   return (
-    <AppFrame>
+    <AppFrame hideFooter={true}>
       <Head>
         <title>社刊 · SYSUMSC</title>
       </Head>

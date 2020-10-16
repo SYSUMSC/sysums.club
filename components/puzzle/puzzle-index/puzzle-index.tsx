@@ -34,7 +34,7 @@ export const PuzzleIndex: FC<PuzzleIndexProps> = ({ submissionsCount, problems }
   const [saying] = useState(SAYINGS[Math.floor(Math.random() * SAYINGS.length)]);
   return (
     <div className={styles.rootContainer}>
-      <h3 className={styles.title}>SYSUMSC 解迷游戏</h3>
+      <h3 className={styles.title}>SYSUMSC 解谜游戏</h3>
       <div className={styles.sayingContainer}>
         <p className={styles.saying}>{saying}</p>
       </div>

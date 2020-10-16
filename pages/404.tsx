@@ -8,7 +8,7 @@ export default function App404Page() {
   return (
     <AppFrame>
       <Head>
-        <title>页面不存在 · SYSUMSC</title>
+        <title>此页面不存在 · SYSUMSC</title>
       </Head>
       <div className={styles.container}>
         <h2 className={styles.indicator}>

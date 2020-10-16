@@ -44,7 +44,7 @@ export const AppFrame: FC<AppFrameProps> = ({ children, hideFooter }) => {
                 <Nav.Link href="/journal">社刊</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link href="/puzzle">解迷</Nav.Link>
+                <Nav.Link href="/puzzle">解谜</Nav.Link>
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link href="/recruit">招新</Nav.Link>
