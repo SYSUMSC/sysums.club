@@ -30,7 +30,7 @@ export default function PuzzleIndexPage() {
         <div className={styles.centerContainer}>
           {!error && !data && <LoadingIndicatorWithMessage loading={true} />}
           {error && (
-            <ProblemLoadingIndicator
+            <LoadingIndicatorWithMessage
               errorMessage={error.message === 'Unauthorized' ? '请先登录再进行解谜' : error.message}
             />
           )}
