@@ -77,7 +77,10 @@ export const RecruitIndex: FC<RecruitIndexProps> = ({ recruitProgress, initialFo
               },
               true
             )
-              .then(() => setRecentUpdateSuccess(true))
+              .then(() => {
+                setRecentUpdateSuccess(true);
+                setErrorMessage(null);
+              })
               .catch((error) => setErrorMessage(error.message))
               .finally(() => {
                 setUpdating(false);
