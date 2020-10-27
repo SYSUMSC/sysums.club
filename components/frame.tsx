@@ -46,9 +46,6 @@ export const AppFrame: FC<AppFrameProps> = ({ children, hideFooter }) => {
               <Nav.Item>
                 <Nav.Link href="/puzzle">解谜</Nav.Link>
               </Nav.Item>
-              <Nav.Item>
-                <Nav.Link href="/recruit">招新</Nav.Link>
-              </Nav.Item>
             </Nav>
             <Navbar.Text className="ml-auto">
               <UserStatus />
