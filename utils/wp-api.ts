@@ -3,6 +3,8 @@ import cryptoRandomString from 'crypto-random-string';
 const API_URL = 'https://wp.sysums.club/graphql';
 const FETCH_HEADERS = { 'Content-Type': 'application/json' };
 
+let lastLoginTime;
+
 const loginMutation = `
 mutation {
   login( input: {
@@ -14,13 +16,18 @@ mutation {
   }
 }`;
 
+function isLoginExpired() {
+  return !lastLoginTime || Date.now() - lastLoginTime >= 1600 * 1000; // around 30min
+}
+
 export async function login() {
   const response = await fetchFromWpApi(loginMutation, {}, true);
   FETCH_HEADERS['Authorization'] = `Bearer ${response.login.authToken}`;
+  lastLoginTime = Date.now();
 }
 
 export async function fetchFromWpApi(query: string, variables: any = {}, skipAuthCheck = false) {
-  if (!FETCH_HEADERS['Authorization'] && !skipAuthCheck) {
+  if (isLoginExpired() && !skipAuthCheck) {
     await login();
   }
   const response = await fetch(API_URL, {
