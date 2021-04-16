@@ -20,6 +20,16 @@ header {
   .ms-Button-label {
     color: #f8f9fa !important;
   }
+
+  @media (max-width: 576px) {
+    .ms-Pivot-text {
+      font-size: 12px !important;
+    }
+
+    .ms-Pivot .ms-Button {
+      margin-right: 0;
+    }
+  }
 }
 
 a {

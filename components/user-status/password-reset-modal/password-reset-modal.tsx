@@ -3,10 +3,8 @@ import React, { FC, FormEvent, useState } from 'react';
 import { useAsyncAction } from '../../../utils/utils';
 import { fetchFromApi } from '../../../utils/api';
 import { AsyncDataButton } from '../../shared/async-data-button/async-data-button';
-import { CheckOutlined } from '@ant-design/icons';
-import { Modal, ProgressIndicator, TextField } from '@fluentui/react';
-import { AppModal } from '../../shared/modal/AppModal';
-import App from 'next/app';
+import { ProgressIndicator, TextField } from '@fluentui/react';
+import { AppModal } from '../../shared/app-modal/app-modal';
 
 export type PasswordResetModalProps = {
   showModal: boolean;
@@ -27,13 +25,11 @@ export const PasswordResetModal: FC<PasswordResetModalProps> = ({
   email,
   token
 }) => {
-  const [validated, setValidated] = useState(false);
   const [requesting, setRequesting, errorMessage, setErrorMessage] = useAsyncAction();
   const [success, setSuccess] = useState(false);
   const [password, setPassword] = useState('');
 
   async function onSubmit(form: HTMLFormElement) {
-    setValidated(true);
     const dto: PasswordResetDto = { email, password, token };
     if (form.checkValidity()) {
       setRequesting(true);
@@ -53,7 +49,6 @@ export const PasswordResetModal: FC<PasswordResetModalProps> = ({
         setErrorMessage(error.message);
       }
       setRequesting(false);
-      setValidated(false);
     }
   }
 
@@ -65,6 +60,7 @@ export const PasswordResetModal: FC<PasswordResetModalProps> = ({
       caption="重置密码"
     >
       <form
+        noValidate
         onSubmit={(event: FormEvent<HTMLFormElement>) => {
           event.preventDefault();
           event.stopPropagation();

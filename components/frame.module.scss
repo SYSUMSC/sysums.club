@@ -11,8 +11,24 @@
     padding: 0 24px;
     background: #1a1a1f;
 
-    @media (max-width: 500px) {
-      padding: 0 12px;
+    .logo {
+      flex: none;
+      display: block;
+      max-height: 30px;
+      padding: 8px 0;
+    }
+
+    .nav {
+      margin: 0 24px;
+      flex: 1;
+    }
+
+    .userStatus {
+      flex: none;
+    }
+
+    @media (max-width: 700px) {
+      padding: 0 8px;
       display: grid;
       grid-template-areas:
         'a c'
@@ -25,32 +41,13 @@
       .nav {
         grid-area: b;
         justify-self: center;
+        margin: 0;
       }
 
       .userStatus {
         grid-area: c;
         justify-self: right;
       }
-    }
-
-    .logo {
-      flex: none;
-      display: block;
-      max-height: 30px;
-      padding: 8px 0;
-    }
-
-    .nav {
-      margin: 0 24px;
-      flex: 1;
-
-      @media (max-width: 768px) {
-        margin: 0 8px;
-      }
-    }
-
-    .userStatus {
-      flex: none;
     }
   }
 
@@ -93,6 +90,10 @@
           padding-left: 0;
           margin-bottom: 0;
           font-size: 0.9em;
+
+          li {
+            margin-bottom: 4px;
+          }
 
           li > a {
             color: unset;

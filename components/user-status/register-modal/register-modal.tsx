@@ -4,8 +4,8 @@ import { fetchFromApi } from '../../../utils/api';
 import styles from './register-modal.module.scss';
 import { AsyncDataButton } from '../../shared/async-data-button/async-data-button';
 import { mutate } from 'swr';
-import { Modal, ProgressIndicator, TextField } from '@fluentui/react';
-import { AppModal } from '../../shared/modal/AppModal';
+import { ProgressIndicator, TextField } from '@fluentui/react';
+import { AppModal } from '../../shared/app-modal/app-modal';
 
 export type RegisterModalProps = {
   showModal: boolean;
@@ -22,13 +22,11 @@ interface UserRegisterResponse {
 }
 
 export const RegisterModal: FC<RegisterModalProps> = ({ showModal, onHide }) => {
-  const [validated, setValidated] = useState(false);
   const [registering, setRegistering, errorMessage, setErrorMessage] = useAsyncAction();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   async function onSubmit(form: HTMLFormElement) {
-    setValidated(true);
     const dto: UserRegisterDto = { email, password };
     if (form.checkValidity()) {
       setRegistering(true);
@@ -46,7 +44,6 @@ export const RegisterModal: FC<RegisterModalProps> = ({ showModal, onHide }) => 
       } catch (error) {
         setErrorMessage(error.message);
         setRegistering(false);
-        setValidated(false);
       }
     }
   }

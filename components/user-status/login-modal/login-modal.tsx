@@ -4,8 +4,8 @@ import { fetchFromApi } from '../../../utils/api';
 import { AsyncDataButton } from '../../shared/async-data-button/async-data-button';
 import { useAsyncAction } from '../../../utils/utils';
 import { mutate } from 'swr';
-import { DefaultButton, Modal, ProgressIndicator, TextField } from '@fluentui/react';
-import { AppModal } from '../../shared/modal/AppModal';
+import { DefaultButton, ProgressIndicator, TextField } from '@fluentui/react';
+import { AppModal } from '../../shared/app-modal/app-modal';
 
 export type LoginModalProps = {
   showModal: boolean;

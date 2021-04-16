@@ -3,9 +3,8 @@ import { useAsyncAction } from '../../../utils/utils';
 import { fetchFromApi } from '../../../utils/api';
 import styles from '../login-modal/login-modal.module.scss';
 import { AsyncDataButton } from '../../shared/async-data-button/async-data-button';
-import { CheckOutlined } from '@ant-design/icons';
-import { Modal, ProgressIndicator, TextField } from '@fluentui/react';
-import { AppModal } from '../../shared/modal/AppModal';
+import { ProgressIndicator, TextField } from '@fluentui/react';
+import { AppModal } from '../../shared/app-modal/app-modal';
 
 export type PasswordResetRequestModalProps = {
   showModal: boolean;
@@ -20,13 +19,11 @@ export const PasswordResetRequestModal: FC<PasswordResetRequestModalProps> = ({
   showModal,
   onHide
 }) => {
-  const [validated, setValidated] = useState(false);
   const [requesting, setRequesting, errorMessage, setErrorMessage] = useAsyncAction();
   const [success, setSuccess] = useState(false);
   const [email, setEmail] = useState('');
 
   async function onSubmit(form: HTMLFormElement) {
-    setValidated(true);
     const dto: PasswordResetRequestDto = { email };
     if (form.checkValidity()) {
       setRequesting(true);
@@ -45,7 +42,6 @@ export const PasswordResetRequestModal: FC<PasswordResetRequestModalProps> = ({
         setErrorMessage(error.message);
       }
       setRequesting(false);
-      setValidated(false);
     }
   }
 

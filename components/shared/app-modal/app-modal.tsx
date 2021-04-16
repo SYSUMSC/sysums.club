@@ -1,4 +1,4 @@
-import styles from './AppModal.module.scss';
+import styles from './app-modal.module.scss';
 import { FC, MouseEventHandler, PropsWithChildren } from 'react';
 import { IconButton, IModalProps, Modal } from '@fluentui/react';
 
