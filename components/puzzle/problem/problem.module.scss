@@ -39,4 +39,17 @@
   .answerInputTitle {
     margin-bottom: 6px;
   }
+
+  .inputContainer {
+    display: flex;
+
+    .answerInput {
+      flex: 1;
+      margin-right: 12px;
+    }
+
+    .submitButton {
+      flex: none;
+    }
+  }
 }

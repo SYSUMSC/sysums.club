@@ -1,11 +1,12 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
 import styles from './problem.module.scss';
-import { Button, Form, InputGroup } from 'react-bootstrap';
 import { AsyncDataButton } from '../../shared/async-data-button/async-data-button';
 import { useAsyncAction } from '../../../utils/utils';
 import { fetchFromApi } from '../../../utils/api';
 import { useRouter } from 'next/router';
 import { PassedIndicator } from '../passed-indicator/passed-indicator';
+import { DefaultButton, TextField } from '@fluentui/react';
+import { GhostButton } from '../../shared/ghost-button/GhostButton';
 
 export type ProblemProps = {
   id: number;
@@ -28,6 +29,7 @@ export const Problem: FC<ProblemProps> = ({ id, title, contentHtml, script }) =>
   const [submitting, setSubmitting, errorMessage, setErrorMessage] = useAsyncAction();
   const [passed, setPassed] = useState(false);
   const instance = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (!passed) {
       window['PROBLEM_ID'] = id;
@@ -38,12 +40,28 @@ export const Problem: FC<ProblemProps> = ({ id, title, contentHtml, script }) =>
       }
     }
   }, [id]);
+
+  async function onClick() {
+    setSubmitting(true);
+    const dto: SubmitAnswerDto = { answer };
+    try {
+      const response = await fetchFromApi<SubmitAnswerResponse>(`puzzle/problem/${id}`, {
+        method: 'POST',
+        body: JSON.stringify(dto)
+      });
+      setPassed(response.passed);
+    } catch (error) {
+      setErrorMessage(error.message);
+    }
+    setSubmitting(false);
+  }
+
   return (
     <div className={styles.rootContainer}>
       <h3 className={styles.titleContainer}>
-        <Button variant="outline-light" onClick={() => router.push('/puzzle')}>
+        <GhostButton onClick={() => router.push('/puzzle')} variant="white">
           返回
-        </Button>
+        </GhostButton>
         <span className={styles.title}>{title}</span>
       </h3>
       <hr className={styles.divider} />
@@ -56,35 +74,21 @@ export const Problem: FC<ProblemProps> = ({ id, title, contentHtml, script }) =>
           />
           <hr className={styles.divider} />
           <p className={styles.answerInputTitle}>你的答案</p>
-          <InputGroup>
-            <Form.Control
+          <div className={styles.inputContainer}>
+            <TextField
               className={styles.answerInput}
               value={answer}
-              onChange={(event) => setAnswer(event.target.value)}
+              onChange={(_, value) => setAnswer(value)}
             />
-            <InputGroup.Append>
-              <AsyncDataButton
-                className={styles.submitButton}
-                variant="outline-primary"
-                type="submit"
-                extra={{ isLoading: submitting, errorMessage: errorMessage }}
-                disabled={!answer}
-                onClick={() => {
-                  setSubmitting(true);
-                  const dto: SubmitAnswerDto = { answer };
-                  fetchFromApi<SubmitAnswerResponse>(`puzzle/problem/${id}`, {
-                    method: 'POST',
-                    body: JSON.stringify(dto)
-                  })
-                    .then((response) => setPassed(response.passed))
-                    .catch((error) => setErrorMessage(error.message))
-                    .finally(() => setSubmitting(false));
-                }}
-              >
-                提交
-              </AsyncDataButton>
-            </InputGroup.Append>
-          </InputGroup>
+            <AsyncDataButton
+              className={styles.submitButton}
+              type="submit"
+              text="提交"
+              extra={{ isLoading: submitting, errorMessage: errorMessage }}
+              disabled={!answer}
+              onClick={() => onClick()}
+            />
+          </div>
         </div>
       )}
     </div>

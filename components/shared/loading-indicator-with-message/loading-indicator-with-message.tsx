@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import styles from './loading-indicator-with-message.module.scss';
 import { FrownOutlined, LoadingOutlined } from '@ant-design/icons';
+import { FontIcon } from '@fluentui/react';
 
 export type LoadingIndicatorWithMessageProps = {
   loading?: boolean;
@@ -16,7 +17,7 @@ export const LoadingIndicatorWithMessage: FC<LoadingIndicatorWithMessageProps> =
       {loading && <LoadingOutlined />}
       {errorMessage && (
         <>
-          <FrownOutlined className={styles.icon} />
+          <FontIcon iconName="ErrorBadge" className={styles.icon} />
           {errorMessage}
         </>
       )}

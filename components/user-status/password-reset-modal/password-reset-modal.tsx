@@ -1,10 +1,12 @@
 import styles from './password-reset-modal.module.scss';
 import React, { FC, FormEvent, useState } from 'react';
 import { useAsyncAction } from '../../../utils/utils';
-import { Form, Modal } from 'react-bootstrap';
 import { fetchFromApi } from '../../../utils/api';
 import { AsyncDataButton } from '../../shared/async-data-button/async-data-button';
 import { CheckOutlined } from '@ant-design/icons';
+import { Modal, ProgressIndicator, TextField } from '@fluentui/react';
+import { AppModal } from '../../shared/modal/AppModal';
+import App from 'next/app';
 
 export type PasswordResetModalProps = {
   showModal: boolean;
@@ -29,77 +31,67 @@ export const PasswordResetModal: FC<PasswordResetModalProps> = ({
   const [requesting, setRequesting, errorMessage, setErrorMessage] = useAsyncAction();
   const [success, setSuccess] = useState(false);
   const [password, setPassword] = useState('');
+
+  async function onSubmit(form: HTMLFormElement) {
+    setValidated(true);
+    const dto: PasswordResetDto = { email, password, token };
+    if (form.checkValidity()) {
+      setRequesting(true);
+      try {
+        await fetchFromApi(
+          'user/reset',
+          {
+            method: 'POST',
+            body: JSON.stringify(dto)
+          },
+          true
+        );
+        setErrorMessage('');
+        setSuccess(true);
+        setTimeout(() => window.location.reload(), 3000);
+      } catch (error) {
+        setErrorMessage(error.message);
+      }
+      setRequesting(false);
+      setValidated(false);
+    }
+  }
+
   return (
-    <Modal show={showModal} onHide={onHide} backdrop="static" keyboard={false}>
-      <Modal.Header closeButton>
-        <Modal.Title>重置密码</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <Form
-          noValidate
-          validated={validated}
-          onSubmit={(event: FormEvent<HTMLFormElement>) => {
-            const form = event.currentTarget;
-            event.preventDefault();
-            event.stopPropagation();
-            setValidated(true);
-            const dto: PasswordResetDto = { email, password, token };
-            if (form.checkValidity()) {
-              setRequesting(true);
-              fetchFromApi(
-                'user/reset',
-                {
-                  method: 'POST',
-                  body: JSON.stringify(dto)
-                },
-                true
-              )
-                .then(() => {
-                  setErrorMessage('');
-                  setSuccess(true);
-                  setTimeout(() => window.location.reload(), 3000);
-                })
-                .catch((error) => setErrorMessage(error.message))
-                .finally(() => {
-                  setRequesting(false);
-                  setValidated(false);
-                });
-            }
-          }}
-        >
-          <Form.Group controlId="email">
-            <Form.Label>邮箱地址</Form.Label>
-            <Form.Control required type="email" value={email} disabled={true} />
-          </Form.Group>
-          <Form.Group controlId="password">
-            <Form.Label>新密码</Form.Label>
-            <Form.Control
-              required
-              type="password"
-              pattern="[a-zA-Z0-9#@!~%^&*]{8,64}"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              disabled={requesting}
-            />
-          </Form.Group>
-          <div className={styles.buttonContainer}>
-            <AsyncDataButton
-              variant="primary"
-              type="submit"
-              extra={{ isLoading: requesting, forceDisabled: success, errorMessage }}
-            >
-              {!success ? (
-                '重置密码'
-              ) : (
-                <>
-                  <CheckOutlined />
-                  重置成功，页面即将刷新
-                </>
-              )}
-            </AsyncDataButton>
-          </div>
-        </Form>
-      </Modal.Body>
-    </Modal>
+    <AppModal
+      titleAriaId="password-reset-modal"
+      isOpen={showModal}
+      onDismiss={onHide}
+      caption="重置密码"
+    >
+      <form
+        onSubmit={(event: FormEvent<HTMLFormElement>) => {
+          event.preventDefault();
+          event.stopPropagation();
+          onSubmit(event.currentTarget);
+        }}
+      >
+        <TextField label="邮箱地址" type="email" value={email} disabled={true} required={true} />
+        <TextField
+          label="新密码"
+          type="password"
+          pattern="[a-zA-Z0-9#@!~%^&*]{8,64}"
+          description="长度至少大于8个字符，仅支持英文、数字以及一些特殊字符"
+          value={password}
+          onChange={(_, value) => setPassword(value)}
+          disabled={requesting}
+          required={true}
+        />
+        <div className={styles.buttonContainer}>
+          <AsyncDataButton
+            type="submit"
+            iconProps={{ iconName: success ? 'CheckMark' : undefined }}
+            text={!success ? '重置密码' : '重置成功，页面即将刷新'}
+            extra={{ isLoading: requesting, forceDisabled: success, errorMessage }}
+          />
+        </div>
+      </form>
+      {requesting && <ProgressIndicator barHeight={3} />}
+    </AppModal>
   );
 };

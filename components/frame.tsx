@@ -1,9 +1,9 @@
-import React, { FC } from 'react';
-import { Nav, Navbar } from 'react-bootstrap';
+import React, { FC, useEffect } from 'react';
 import styles from './frame.module.scss';
 import { UserStatus } from './user-status/user-status';
 import { usePrimaryPath } from '../utils/utils';
 import Head from 'next/head';
+import { Pivot, PivotItem } from '@fluentui/react';
 
 export type AppFrameProps = {
   hideFooter?: boolean;
@@ -15,43 +15,32 @@ export const AppFrame: FC<AppFrameProps> = ({ children, hideFooter }) => {
     <>
       <Head>
         <script
-          src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"
-          integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+          src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"
           crossOrigin="anonymous"
           async
         />
       </Head>
       <div className={styles.rootContainer}>
-        <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark">
-          <Navbar.Brand href="/">
-            <img
-              src="/logo-h30.png"
-              srcSet="/logo-h30.png 1x, /logo-h60.png 2x"
-              height="30"
-              alt="SYSUMSC"
-            />
-          </Navbar.Brand>
-          <Navbar.Toggle />
-          <Navbar.Collapse>
-            <Nav activeKey={primaryPath}>
-              <Nav.Item>
-                <Nav.Link href="/">首页</Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link href="/blog">博客</Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link href="/journal">社刊</Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link href="/puzzle">解谜</Nav.Link>
-              </Nav.Item>
-            </Nav>
-            <Navbar.Text className="ml-auto">
-              <UserStatus />
-            </Navbar.Text>
-          </Navbar.Collapse>
-        </Navbar>
+        <header className={styles.header}>
+          <img
+            className={styles.logo}
+            src="/logo-h30.png"
+            srcSet="/logo-h30.png 1x, /logo-h60.png 2x"
+          />
+          <nav className={styles.nav}>
+            <Pivot
+              selectedKey={primaryPath}
+              onLinkClick={(item) => (window.location.href = item.props.itemKey)}
+            >
+              <PivotItem headerText="首页" itemKey="/" key="/" />
+              <PivotItem headerText="社刊" itemKey="/journal" key="/journal" />
+              <PivotItem headerText="解谜" itemKey="/puzzle" key="/puzzle" />
+            </Pivot>
+          </nav>
+          <div className={styles.userStatus}>
+            <UserStatus />
+          </div>
+        </header>
         <div className={styles.mainSection}>{children}</div>
         {!hideFooter && (
           <footer className={styles.footerSection}>
@@ -107,8 +96,7 @@ export const AppFrame: FC<AppFrameProps> = ({ children, hideFooter }) => {
                         className={styles.logo}
                       />
                       <div className={styles.intro}>
-                        <p>由一群热爱技术的计算机爱好者</p>
-                        <p>于2002年夏在中大校园正式成立</p>
+                        由一群热爱技术的计算机爱好者于 2002 年夏天在中山大学南校园创立。
                       </div>
                     </div>
                   </li>

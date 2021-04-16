@@ -1,32 +1,32 @@
-.textButton {
-  cursor: pointer;
-  transition: all 250ms cubic-bezier(0.27, 0.01, 0.38, 1.06);
-  color: rgba(255, 255, 255, 0.5);
-
-  &:hover {
-    color: rgba(255, 255, 255, 0.75);
-  }
-}
-
-.logoutButton {
-  padding-left: 8px;
-}
-
-.split {
-  cursor: default;
-}
-
-.buttonContainer {
-  padding-top: 8px;
+.container {
+  color: #f8f9fa;
   display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-between;
-}
+  align-items: center;
 
-.warningIcon {
-  padding-right: 8px;
-}
+  & > *:not(:last-child) {
+    display: inline-block;
+    margin-right: 8px;
+  }
 
-.userIcon {
-  padding-right: 4px;
+  .textButton:hover,
+  .textButton:focus {
+    background-color: #151518;
+  }
+
+  .split {
+    cursor: default;
+    color: #f8f9fa;
+  }
+
+  .buttonContainer {
+    padding-top: 8px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+
+  .username {
+    font-size: 14px;
+    color: #b8b8b8;
+  }
 }

@@ -1,9 +1,13 @@
 import React, { FC } from 'react';
 import styles from './article-card.module.scss';
-import { Card } from 'react-bootstrap';
-import { useRouter } from 'next/router';
 import { ArticleMeta, ArticleMetaProps } from '../article-meta/article-meta';
 import { TagListContainer } from '../tag-list-container/tag-list-container';
+import {
+  DocumentCard,
+  DocumentCardDetails,
+  DocumentCardPreview,
+  DocumentCardTitle
+} from '@fluentui/react';
 
 export type ArticleCardProps = {
   articleId: string;
@@ -22,27 +26,15 @@ export const ArticleCard: FC<ArticleCardProps> = ({
   summary,
   tags
 }) => {
-  const router = useRouter();
   return (
-    <Card>
-      <Card.Body className={styles.bootstrapCardBody}>
-        <article className={styles.card}>
-          <div className={styles.thumbnailContainer}>
-            <img className={styles.thumbnail} alt="" src={thumbnailUrl} />
-          </div>
-          <div className={styles.infoContainer}>
-            <ArticleMeta {...meta} />
-            <div
-              className={styles.bodyContainer}
-              onClick={() => router.push(`/blog/article/${articleId}`)}
-            >
-              <h5 className={styles.title}>{title}</h5>
-              <p className={styles.summary}>{summary}</p>
-            </div>
-            <TagListContainer tags={tags} />
-          </div>
-        </article>
-      </Card.Body>
-    </Card>
+    <DocumentCard>
+      <DocumentCardPreview previewImages={[{ previewImageSrc: thumbnailUrl }]} />
+      <DocumentCardDetails>
+        <ArticleMeta {...meta} />
+        <DocumentCardTitle title={title} />
+        <p className={styles.summary}>{summary}</p>
+        <TagListContainer tags={tags} />
+      </DocumentCardDetails>
+    </DocumentCard>
   );
 };

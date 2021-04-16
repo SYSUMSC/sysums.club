@@ -1,5 +1,36 @@
 @import 'theme-definition';
 
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
+  font-weight: 300;
+}
+
+header {
+  .ms-Pivot-text {
+    color: #f8f9fa !important;
+  }
+
+  .ms-Pivot-link:hover {
+    background-color: #151518 !important;
+  }
+
+  .ms-Button-label {
+    color: #f8f9fa !important;
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  text-decoration: underline;
+}
+
 a,
 a:link,
 a:visited,
@@ -8,10 +39,13 @@ a:active {
   color: $link-color;
 }
 
-.carousel,
-.carousel-inner,
-.carousel-item {
-  height: 100%;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
 }
 
 .anticon {
@@ -29,35 +63,11 @@ button .anticon {
   color: $text-color-article-black;
 }
 
-.badge {
-  font-weight: normal;
-}
-
-.card {
-  overflow: hidden !important;
-}
-
-.modal-body {
-  padding: 24px;
-}
-
-.modal-title {
-  margin-bottom: 0 !important;
-}
-
 code {
+  word-wrap: break-word;
   color: unset !important;
 }
 
 p {
   margin-bottom: 16px;
-}
-
-.btn-outline-light {
-  color: $theme-text-color-grey-white;
-
-  &:active,
-  &:hover {
-    color: $theme-color !important;
-  }
 }

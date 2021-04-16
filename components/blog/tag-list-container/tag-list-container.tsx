@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import { Badge } from 'react-bootstrap';
 import styles from './tag-list-container.module.scss';
 import { useRouter } from 'next/router';
 
@@ -15,11 +14,11 @@ export const TagListContainer: FC<TagListContainerProps> = ({ tags }) => {
   return (
     <div className={styles.tagContainer}>
       {tags.map((tag) => (
-        <Badge variant="secondary" key={tag.id}>
+        <div key={tag.id}>
           <span className={styles.tag} onClick={() => router.push(`/blog/tag/${tag.id}`)}>
             {tag.name}
           </span>
-        </Badge>
+        </div>
       ))}
     </div>
   );

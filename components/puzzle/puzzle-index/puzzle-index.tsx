@@ -1,8 +1,8 @@
 import React, { FC, useState } from 'react';
 import styles from './puzzle-index.module.scss';
-import { Button } from 'react-bootstrap';
 import { useRouter } from 'next/router';
-import { CheckCircleOutlined } from '@ant-design/icons';
+import { FontIcon } from '@fluentui/react';
+import { GhostButton } from '../../shared/ghost-button/GhostButton';
 
 export type PuzzleIndexProps = {
   submissionsCount: number;
@@ -15,10 +15,10 @@ export type PuzzleIndexProps = {
 };
 
 const PROBLEM_BUTTON_VARIANT_MAP = {
-  [-1]: 'outline-info',
-  [0]: 'outline-info',
-  [1]: 'outline-warning',
-  [2]: 'outline-danger'
+  [-1]: 'blue',
+  [0]: 'blue',
+  [1]: 'yellow',
+  [2]: 'red'
 };
 
 const SAYINGS = [
@@ -43,20 +43,22 @@ export const PuzzleIndex: FC<PuzzleIndexProps> = ({ submissionsCount, problems }
           你的谜题 ({problems.filter((p) => p.passed).length} / {problems.length})
         </p>
         {problems.map((p) => (
-          <Button
+          <GhostButton
             key={p.id}
-            className={styles.problemButton}
             variant={PROBLEM_BUTTON_VARIANT_MAP[p.level]}
             onClick={() => router.push(`/puzzle/problem/${p.id}`)}
+            className={styles.problemButton}
           >
-            {p.passed && <CheckCircleOutlined />}
+            {p.passed && <FontIcon iconName="CheckMark" />}
             {p.title}
-          </Button>
+          </GhostButton>
         ))}
       </div>
-      <p className={styles.submissionCount}>全体解迷者累计提交答案次数: {submissionsCount}</p>
-      <p className={styles.thanks}>特别鸣谢: @GZTime</p>
-      <p className={styles.version}>2020.9.20 SYSUMSC</p>
+      <div className={styles.footer}>
+        <p>全体解迷者累计提交答案次数: {submissionsCount}</p>
+        <p>特别鸣谢: @GZTime</p>
+        <p>2020.9.20 SYSUMSC</p>
+      </div>
     </div>
   );
 };

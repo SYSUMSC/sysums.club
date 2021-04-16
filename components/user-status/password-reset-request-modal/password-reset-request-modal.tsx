@@ -1,10 +1,11 @@
 import React, { FC, FormEvent, useState } from 'react';
 import { useAsyncAction } from '../../../utils/utils';
-import { Form, Modal } from 'react-bootstrap';
 import { fetchFromApi } from '../../../utils/api';
 import styles from '../login-modal/login-modal.module.scss';
 import { AsyncDataButton } from '../../shared/async-data-button/async-data-button';
 import { CheckOutlined } from '@ant-design/icons';
+import { Modal, ProgressIndicator, TextField } from '@fluentui/react';
+import { AppModal } from '../../shared/modal/AppModal';
 
 export type PasswordResetRequestModalProps = {
   showModal: boolean;
@@ -23,72 +24,64 @@ export const PasswordResetRequestModal: FC<PasswordResetRequestModalProps> = ({
   const [requesting, setRequesting, errorMessage, setErrorMessage] = useAsyncAction();
   const [success, setSuccess] = useState(false);
   const [email, setEmail] = useState('');
+
+  async function onSubmit(form: HTMLFormElement) {
+    setValidated(true);
+    const dto: PasswordResetRequestDto = { email };
+    if (form.checkValidity()) {
+      setRequesting(true);
+      try {
+        await fetchFromApi(
+          'user/reset-request',
+          {
+            method: 'POST',
+            body: JSON.stringify(dto)
+          },
+          true
+        );
+        setErrorMessage('');
+        setSuccess(true);
+      } catch (error) {
+        setErrorMessage(error.message);
+      }
+      setRequesting(false);
+      setValidated(false);
+    }
+  }
+
   return (
-    <Modal show={showModal} onHide={onHide} backdrop="static" keyboard={false}>
-      <Modal.Header closeButton>
-        <Modal.Title>重置密码</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <Form
-          noValidate
-          validated={validated}
-          onSubmit={(event: FormEvent<HTMLFormElement>) => {
-            const form = event.currentTarget;
-            event.preventDefault();
-            event.stopPropagation();
-            setValidated(true);
-            const dto: PasswordResetRequestDto = { email };
-            if (form.checkValidity()) {
-              setRequesting(true);
-              fetchFromApi(
-                'user/reset-request',
-                {
-                  method: 'POST',
-                  body: JSON.stringify(dto)
-                },
-                true
-              )
-                .then(() => {
-                  setErrorMessage('');
-                  setSuccess(true);
-                })
-                .catch((error) => setErrorMessage(error.message))
-                .finally(() => {
-                  setRequesting(false);
-                  setValidated(false);
-                });
-            }
-          }}
-        >
-          <Form.Group controlId="email">
-            <Form.Label>邮箱地址</Form.Label>
-            <Form.Control
-              required
-              type="email"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              disabled={requesting || success}
-            />
-            <Form.Text muted>你的邮箱将收到一封含有指向「重置密码」页面的链接的邮件</Form.Text>
-          </Form.Group>
-          <div className={styles.buttonContainer}>
-            <AsyncDataButton
-              variant="primary"
-              type="submit"
-              extra={{ isLoading: requesting, forceDisabled: success, errorMessage }}
-            >
-              {!success ? (
-                '发送邮件'
-              ) : (
-                <>
-                  <CheckOutlined />
-                  邮件已发送
-                </>
-              )}
-            </AsyncDataButton>
-          </div>
-        </Form>
-      </Modal.Body>
-    </Modal>
+    <AppModal
+      titleAriaId="password-reset-request-modal"
+      isOpen={showModal}
+      onDismiss={onHide}
+      caption="重置密码"
+    >
+      <form
+        onSubmit={(event: FormEvent<HTMLFormElement>) => {
+          event.preventDefault();
+          event.stopPropagation();
+          onSubmit(event.currentTarget);
+        }}
+      >
+        <TextField
+          label="邮箱地址"
+          type="email"
+          description="你的邮箱将收到一封含有指向「重置密码」页面的链接的邮件"
+          value={email}
+          onChange={(_, value) => setEmail(value)}
+          disabled={requesting || success}
+          required={true}
+        />
+        <div className={styles.buttonContainer}>
+          <AsyncDataButton
+            type="submit"
+            iconProps={{ iconName: success ? 'CheckMark' : undefined }}
+            text={!success ? '发送邮件' : '邮件已发送'}
+            extra={{ isLoading: requesting, forceDisabled: success, errorMessage }}
+          />
+        </div>
+      </form>
+      {requesting && <ProgressIndicator barHeight={3} />}
+    </AppModal>
   );
 };

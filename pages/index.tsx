@@ -1,10 +1,10 @@
 import { AppFrame } from '../components/frame';
 import styles from './index.module.scss';
 import React from 'react';
-import { Carousel } from 'react-bootstrap';
 import Head from 'next/head';
+import Slider from 'react-slick';
 
-const carouselImageUrls = [
+const CAROUSEL_IMAGE_URLS = [
   'https://sysumsc-website.oss-cn-shenzhen.aliyuncs.com/website-resource/carousel/1.jpg',
   'https://sysumsc-website.oss-cn-shenzhen.aliyuncs.com/website-resource/carousel/2.jpg',
   'https://sysumsc-website.oss-cn-shenzhen.aliyuncs.com/website-resource/carousel/3.jpg',
@@ -20,13 +20,20 @@ export default function HomePage() {
       </Head>
       <div className={styles.rootContainer}>
         <div className={styles.carouselContainer}>
-          <Carousel indicators={false} controls={false}>
-            {carouselImageUrls.map((url) => (
-              <Carousel.Item key={url}>
-                <img className={styles.carouselImage} src={url} alt="" />
-              </Carousel.Item>
+          <Slider
+            dots={false}
+            arrows={false}
+            infinite={true}
+            speed={800}
+            slidesToShow={1}
+            autoplay={true}
+            autoplaySpeed={3500}
+            className={styles.carousel}
+          >
+            {CAROUSEL_IMAGE_URLS.map((url) => (
+              <img className={styles.carouselImage} key={url} src={url} />
             ))}
-          </Carousel>
+          </Slider>
           <div className={styles.textContainer}>
             <h1 className={styles.slogan}>予力众生 成就不凡</h1>
             <p className={styles.description}>我们是中山大学微软俱乐部</p>
@@ -35,7 +42,7 @@ export default function HomePage() {
         <div className={styles.contentContainer}>
           <div className={styles.content}>
             <section className={styles.contentSection}>
-              <h4 className={styles.title}>我们是谁</h4>
+              <h1 className={styles.title}>我们是谁</h1>
               <p className={styles.paragraph}>
                 我们是来自中山大学的技术类社团MS
                 Club（缩写SYSUMSC)。在我们这里，你能结识到不少热衷于编程技术的伙伴，相互探讨、共同进步，还能获得来自
@@ -45,7 +52,7 @@ export default function HomePage() {
               </p>
             </section>
             <section className={styles.contentSection}>
-              <h4 className={styles.title}>我们的简史</h4>
+              <h1 className={styles.title}>我们的简史</h1>
               <p className={styles.paragraph}>
                 本俱乐部于2002年6月由中山大学研究生会发起，并于同年在珠海校区成立分会，2006年3月成立东校区分会。现阶段总会在东校区，其他分会暂取消运作。
                 微软学生俱乐部实践空间站于2017年11月正式上线，目前有16个不同主题的项目供同学们研究，项目横跨AI、MR、Cloud&Cognitive
@@ -55,17 +62,17 @@ export default function HomePage() {
               </p>
             </section>
             <section className={styles.contentSection}>
-              <h4 className={styles.title}>
+              <h1 className={styles.title}>
                 “学习先进技术，开括创新思维，体验多元文化，成就一流人才”
-              </h4>
+              </h1>
               <p className={styles.quoteSource}>是我们不变的宗旨。</p>
             </section>
             <section className={styles.contentSection}>
-              <h4 className={styles.title}>“东校区第一技术社团”</h4>
+              <h1 className={styles.title}>“东校区第一技术社团”</h1>
               <p className={styles.quoteSource}>是对我们的普遍评价。</p>
             </section>
             <section className={styles.contentSection}>
-              <h4 className={styles.title}>我们的活动内容</h4>
+              <h1 className={styles.title}>我们的活动内容</h1>
               <p className={styles.paragraph}>
                 无论是人工智能、机器学习、Web开发、UWP开发、游戏开发、ACM、信息安全，还是Windows、小冰、Surface、Xbox、Hololens，
                 或是
@@ -75,7 +82,7 @@ export default function HomePage() {
               </p>
             </section>
             <section className={styles.contentSection}>
-              <h4 className={styles.title}>我们的活动照片</h4>
+              <h1 className={styles.title}>我们的活动照片</h1>
               <figure className={styles.imageContainer}>
                 <img
                   className={styles.image}
@@ -83,7 +90,7 @@ export default function HomePage() {
                   alt="技术分享的图片"
                 />
                 <figcaption className={styles.caption}>
-                  <h5 className={styles.captionTitle}>技术分享</h5>
+                  <h3 className={styles.captionTitle}>技术分享</h3>
                   <p className={styles.description}>每周举办技术分享，传播知识，共进发展。</p>
                 </figcaption>
               </figure>
@@ -94,7 +101,7 @@ export default function HomePage() {
                   alt="黑客松的图片"
                 />
                 <figcaption className={styles.caption}>
-                  <h5 className={styles.captionTitle}>黑客松</h5>
+                  <h3 className={styles.captionTitle}>黑客松</h3>
                   <p className={styles.description}>每年定期举办黑客松，紧张刺激，挑战自我。</p>
                 </figcaption>
               </figure>
@@ -105,19 +112,15 @@ export default function HomePage() {
                   alt="团建的图片"
                 />
                 <figcaption className={styles.caption}>
-                  <h5 className={styles.captionTitle}>团队建设</h5>
+                  <h3 className={styles.captionTitle}>团队建设</h3>
                   <p className={styles.description}>每年定期举办团建活动，相互协作，增进友谊。</p>
                 </figcaption>
               </figure>
             </section>
             <section className={styles.contentSection}>
-              <h4 className={styles.title}>加入我们</h4>
+              <h1 className={styles.title}>加入我们</h1>
               <p className={styles.quoteSource}>
                 每年九月中旬前后我们都会举行招新活动，请留意我们在
-                <a target="_blank" href="/blog">
-                  博客
-                </a>
-                和
                 <a
                   href="https://mp.weixin.qq.com/s/jBrrgkhmDRwZdyl_JikW4A"
                   rel="noopener"

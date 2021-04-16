@@ -1,8 +1,9 @@
 import React, { FC, useRef } from 'react';
-import { Button, ButtonProps, Overlay, Spinner, Tooltip } from 'react-bootstrap';
-import { WarningOutlined, LoadingOutlined } from '@ant-design/icons/lib';
+import { DefaultButton, DirectionalHint, TooltipHost } from '@fluentui/react';
+import { IButtonProps } from '@fluentui/react/lib/components/Button/Button.types';
 
-export type AsyncDataButtonProps = ButtonProps & {
+export type AsyncDataButtonProps = IButtonProps & {
+  text: string;
   extra: {
     isLoading: boolean;
     forceDisabled?: boolean;
@@ -10,25 +11,32 @@ export type AsyncDataButtonProps = ButtonProps & {
   };
 };
 
-export const AsyncDataButton: FC<AsyncDataButtonProps> = (props) => {
-  const {
-    extra: { isLoading, forceDisabled, errorMessage }
-  } = props;
+export const AsyncDataButton: FC<AsyncDataButtonProps> = ({
+  text,
+  extra: { isLoading, forceDisabled, errorMessage },
+  ...props
+}) => {
   const target = useRef(null);
+
+  function getIconName() {
+    if (!isLoading && errorMessage) {
+      return 'Warning';
+    }
+    return undefined;
+  }
+
   return (
-    <>
-      <Button disabled={isLoading || forceDisabled} {...props} ref={target}>
-        {!isLoading && !!errorMessage && <WarningOutlined />}
-        {isLoading && <LoadingOutlined />}
-        {props.children}
-      </Button>
-      <Overlay target={target.current} show={!!errorMessage} placement="top">
-        {(props) => (
-          <Tooltip id="async-data-button-overlay" {...props}>
-            {errorMessage}
-          </Tooltip>
-        )}
-      </Overlay>
-    </>
+    <TooltipHost
+      directionalHint={DirectionalHint.bottomCenter}
+      content={!isLoading ? errorMessage : undefined}
+    >
+      <DefaultButton
+        iconProps={{ iconName: getIconName() }}
+        disabled={isLoading || forceDisabled}
+        ref={target}
+        text={text}
+        {...props}
+      />
+    </TooltipHost>
   );
 };

@@ -1,0 +1,17 @@
+.container {
+  padding: 8px 12px;
+
+  .header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+
+    .caption {
+      flex: 1;
+      margin: 0;
+    }
+  }
+
+  .body {
+  }
+}

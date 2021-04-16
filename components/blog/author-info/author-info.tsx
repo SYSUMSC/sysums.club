@@ -1,8 +1,7 @@
 import React, { FC } from 'react';
-import { Image } from 'react-bootstrap';
 import styles from './author-info.module.scss';
-import { GlobalOutlined, FileTextOutlined, CalendarOutlined } from '@ant-design/icons/lib';
-import { Card, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { FileTextOutlined, CalendarOutlined } from '@ant-design/icons/lib';
+import { DirectionalHint, DocumentCard, Image, TooltipHost } from '@fluentui/react';
 
 export type AuthorInfoProps = {
   authorId: string;
@@ -23,53 +22,41 @@ export const AuthorInfo: FC<AuthorInfoProps> = ({
   joinDate,
   description
 }) => (
-  <Card>
-    <Card.Body>
-      <div className={styles.rootContainer}>
-        <div className={styles.avatarContainer}>
-          <Image src={avatarUrl} fluid />
-        </div>
-        <article className={styles.infoContainer}>
-          <a href={`/blog/author/${authorId}`}>
-            <h3>{name}</h3>
-          </a>
-          <div className={styles.metaContainer}>
-            {website && (
-              <OverlayTrigger
-                placement="bottom"
-                overlay={<Tooltip id="tooltip-website">网站</Tooltip>}
-              >
-                <span className={styles.meta}>
-                  <GlobalOutlined />
-                  <a href={website} target="_blank" rel="noopener">
-                    {website}
-                  </a>
-                </span>
-              </OverlayTrigger>
-            )}
-            <OverlayTrigger
-              placement="bottom"
-              overlay={<Tooltip id="tooltip-article-count">文章数量</Tooltip>}
-            >
-              <span className={styles.meta}>
-                <FileTextOutlined />
-                <a href={`/blog/author/${authorId}`}>{articleCount}</a>
-              </span>
-            </OverlayTrigger>
-            <OverlayTrigger
-              placement="bottom"
-              overlay={<Tooltip id="tooltip-join-date">注册日期</Tooltip>}
-            >
-              <span className={styles.meta}>
-                <CalendarOutlined />
-                <span>{joinDate}</span>
-              </span>
-            </OverlayTrigger>
-          </div>
-          <hr />
-          <p>{description}</p>
-        </article>
+  <DocumentCard>
+    <div className={styles.rootContainer}>
+      <div className={styles.avatarContainer}>
+        <Image src={avatarUrl} shouldFadeIn={true} />
       </div>
-    </Card.Body>
-  </Card>
+      <article className={styles.infoContainer}>
+        <a href={`/blog/author/${authorId}`}>
+          <h3>{name}</h3>
+        </a>
+        <div className={styles.metaContainer}>
+          {website && (
+            <TooltipHost content="网址" directionalHint={DirectionalHint.bottomCenter}>
+              <span className={styles.meta}>
+                <a href={website} target="_blank" rel="noopener">
+                  {website}
+                </a>
+              </span>
+            </TooltipHost>
+          )}
+          <TooltipHost content="文章数量" directionalHint={DirectionalHint.bottomCenter}>
+            <span className={styles.meta}>
+              <FileTextOutlined />
+              <a href={`/blog/author/${authorId}`}>{articleCount}</a>
+            </span>
+          </TooltipHost>
+          <TooltipHost content="注册日期" directionalHint={DirectionalHint.bottomCenter}>
+            <span className={styles.meta}>
+              <CalendarOutlined />
+              <span>{joinDate}</span>
+            </span>
+          </TooltipHost>
+        </div>
+        <hr />
+        <p>{description}</p>
+      </article>
+    </div>
+  </DocumentCard>
 );

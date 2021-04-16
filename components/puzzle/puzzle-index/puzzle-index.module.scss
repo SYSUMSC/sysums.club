@@ -10,13 +10,15 @@
     background-color: rgba($theme-color, 0.72) !important;
   }
   text-align: center;
-  max-width: 520px;
+  max-width: 380px;
   margin-bottom: 48px;
 
   .title {
+    font-size: 28px;
     color: $theme-text-color-white;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
     text-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 10px rgba(255, 255, 255, 0.5);
+    letter-spacing: 2px;
   }
 
   .sayingContainer {
@@ -31,23 +33,23 @@
     margin-bottom: 32px;
 
     .info {
-      margin-bottom: 4px;
+      margin-bottom: 8px;
     }
 
     .problemButton {
-      width: 100%;
-      margin-bottom: 12px;
+      margin-bottom: 18px;
     }
   }
 
-  .submissionCount,
-  .thanks {
+  .footer {
     font-size: 12px;
-    margin-bottom: 2px;
-  }
 
-  .version {
-    font-size: 12px;
-    margin-bottom: 0;
+    & > * {
+      margin: 0;
+    }
+
+    & > *:not(:last-child) {
+      margin-bottom: 8px;
+    }
   }
 }
