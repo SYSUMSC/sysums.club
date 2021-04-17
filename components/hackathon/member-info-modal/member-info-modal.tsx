@@ -1,29 +1,51 @@
 import styles from './member-info-modal.module.scss';
-import React, { FC, FormEvent, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { AppModal } from '../../shared/app-modal/app-modal';
 import { MemberInfo } from '../hackathon-index/hackathon-index';
-import { ComboBox, DefaultButton, IModalProps, TextField } from '@fluentui/react';
+import {
+  ActionButton,
+  Checkbox,
+  ComboBox,
+  DefaultButton,
+  IModalProps,
+  TextField
+} from '@fluentui/react';
 import update from 'immutability-helper';
 
 export interface MemberInfoProps {
-  memberInfo: Partial<MemberInfo>;
-  onSave: (newValue: Partial<MemberInfo>) => void;
+  memberInfo?: MemberInfo;
+  onSave: (isNewMember: boolean, oldInfo: MemberInfo, newInfo: MemberInfo) => void;
+  onDelete: (memberInfo: MemberInfo) => void;
 }
 
-export const MemberInfoModal: FC<MemberInfoProps & Omit<IModalProps, 'caption'>> = ({
+export const MemberInfoModal: FC<MemberInfoProps & Omit<IModalProps, 'caption' | 'isBlocking'>> = ({
   memberInfo,
   onSave,
+  onDelete,
   ...props
 }) => {
-  const [modifiedInfo, setModifiedInfo] = useState(memberInfo);
+  const [modifiedInfo, setModifiedInfo] = useState(
+    memberInfo ?? ({ name: '新成员' } as MemberInfo)
+  );
   return (
-    <AppModal {...props} caption={`队伍成员：${memberInfo.name}`}>
+    <AppModal {...props} caption={`队伍成员：${modifiedInfo.name}`} isBlocking={true}>
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          onSave(modifiedInfo);
+          if (!modifiedInfo.gender || !modifiedInfo.educationalBackground) {
+            return;
+          }
+          onSave(!memberInfo, memberInfo, modifiedInfo);
         }}
       >
+        <Checkbox
+          label="设为队长"
+          checked={modifiedInfo.isCaptain}
+          onChange={(_, checked) =>
+            setModifiedInfo(update(modifiedInfo, { isCaptain: { $set: checked } }))
+          }
+          disabled={memberInfo?.isCaptain}
+        />
         <TextField
           label="姓名"
           value={modifiedInfo.name}
@@ -117,7 +139,17 @@ export const MemberInfoModal: FC<MemberInfoProps & Omit<IModalProps, 'caption'>>
           }
           required={true}
         />
-        <DefaultButton type="submit" style={{ margin: '12px 0', float: 'right' }} text="保存" />
+        <div className={styles.buttonContainer}>
+          <DefaultButton type="submit" text="保存" />
+          {memberInfo && (
+            <ActionButton
+              type="button"
+              iconProps={{ iconName: 'Delete' }}
+              text="删除成员"
+              onClick={() => onDelete(memberInfo)}
+            />
+          )}
+        </div>
       </form>
     </AppModal>
   );

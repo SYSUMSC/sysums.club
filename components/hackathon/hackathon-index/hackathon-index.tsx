@@ -35,7 +35,7 @@ const DEFAULT_FORM_DATA: SignupFormData = {
       isCaptain: true,
       name: '测试',
       gender: 'male',
-      email: '哈哈',
+      email: 'test@qq.com',
       phoneNumber: '哈哈',
       school: '哈哈',
       educationalBackground: 'other',
@@ -47,7 +47,7 @@ const DEFAULT_FORM_DATA: SignupFormData = {
       isCaptain: false,
       name: '测试2',
       gender: 'male',
-      email: '哈哈',
+      email: 'test@qq.com',
       phoneNumber: '哈哈',
       school: '哈哈',
       educationalBackground: 'other',
@@ -59,7 +59,7 @@ const DEFAULT_FORM_DATA: SignupFormData = {
       isCaptain: false,
       name: '测试3',
       gender: 'male',
-      email: '哈哈',
+      email: 'test@qq.com',
       phoneNumber: '哈哈',
       school: '哈哈',
       educationalBackground: 'other',
@@ -73,15 +73,63 @@ const DEFAULT_FORM_DATA: SignupFormData = {
 export const HackathonIndex: FC = () => {
   const [formData, setFormData] = useState<SignupFormData>(DEFAULT_FORM_DATA);
   const [requesting, setRequesting] = useState(false);
-  const [editingMemberInfo, setEditingMemberInfo] = useState<Partial<MemberInfo>>(null);
+  const [editingMemberInfo, setEditingMemberInfo] = useState<MemberInfo>(null);
+  const [showMemberInfoModal, setShowMemberInfoModal] = useState(false);
   return (
     <div className={styles.container}>
-      {editingMemberInfo && (
+      {showMemberInfoModal && (
         <MemberInfoModal
+          onDismiss={() => {
+            setShowMemberInfoModal(false);
+            setEditingMemberInfo(null);
+          }}
+          isOpen={showMemberInfoModal}
           memberInfo={editingMemberInfo}
-          onSave={console.log}
-          onDismiss={() => setEditingMemberInfo(null)}
-          isOpen={!!editingMemberInfo}
+          onDelete={(memberInfo) => {
+            let newFormData: SignupFormData = {
+              ...formData,
+              memberInfo: formData.memberInfo.filter((info) => info !== memberInfo)
+            };
+            if (memberInfo.isCaptain && newFormData.memberInfo.length >= 1) {
+              newFormData = {
+                ...newFormData,
+                memberInfo: [
+                  update(newFormData.memberInfo[0], { isCaptain: { $set: true } }),
+                  ...newFormData.memberInfo.slice(1)
+                ]
+              };
+            }
+            setFormData(newFormData);
+            setShowMemberInfoModal(false);
+            setEditingMemberInfo(null);
+          }}
+          onSave={(isNewMember, oldInfo, newInfo) => {
+            let newFormData = formData;
+            if (newFormData.memberInfo.length <= 0) {
+              newInfo.isCaptain = true;
+            }
+            if (newInfo.isCaptain) {
+              newFormData = {
+                ...newFormData,
+                memberInfo: newFormData.memberInfo.map((info) =>
+                  update(info, { isCaptain: { $set: false } })
+                )
+              };
+            }
+            if (isNewMember) {
+              newFormData = update(newFormData, { memberInfo: { $push: [newInfo] } });
+            } else {
+              newFormData = {
+                ...newFormData,
+                memberInfo: newFormData.memberInfo.map((info) =>
+                  info !== oldInfo ? info : newInfo
+                )
+              };
+            }
+            setFormData(newFormData);
+            setShowMemberInfoModal(false);
+            setEditingMemberInfo(null);
+          }}
         />
       )}
       <div className={styles.confirmSection}>
@@ -134,24 +182,27 @@ export const HackathonIndex: FC = () => {
           <DefaultButton
             iconProps={{ iconName: 'Add' }}
             onClick={() => {
-              setEditingMemberInfo({ name: '新成员' });
+              setEditingMemberInfo(null);
+              setShowMemberInfoModal(true);
             }}
           >
-            添加成员
+            添加队员
           </DefaultButton>
         </h2>
         <div className={styles.memberContainer}>
           {formData.memberInfo?.map((info) => (
             <div
-              key={`${info.name}${info.isCaptain}`}
+              key={`${JSON.stringify(info)}`}
               className={styles.item}
               onClick={() => {
                 setEditingMemberInfo(info);
+                setShowMemberInfoModal(true);
               }}
             >
               <Persona text={info.name} secondaryText={info.isCaptain ? '队长' : '队员'} />
             </div>
           ))}
+          {formData.memberInfo?.length <= 0 && <span>暂无队员</span>}
         </div>
       </div>
     </div>
