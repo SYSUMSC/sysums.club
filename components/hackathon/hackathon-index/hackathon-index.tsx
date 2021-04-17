@@ -18,6 +18,7 @@ export interface MemberInfo {
 }
 
 export interface SignupFormData {
+  confirmed: boolean;
   teamInfo: {
     name: string;
     description: string;
@@ -26,48 +27,12 @@ export interface SignupFormData {
 }
 
 const DEFAULT_FORM_DATA: SignupFormData = {
+  confirmed: false,
   teamInfo: {
     name: '',
     description: ''
   },
-  memberInfo: [
-    {
-      isCaptain: true,
-      name: '测试',
-      gender: 'male',
-      email: 'test@qq.com',
-      phoneNumber: '哈哈',
-      school: '哈哈',
-      educationalBackground: 'other',
-      grade: '哈哈',
-      major: '哈哈',
-      experience: '哈哈'
-    },
-    {
-      isCaptain: false,
-      name: '测试2',
-      gender: 'male',
-      email: 'test@qq.com',
-      phoneNumber: '哈哈',
-      school: '哈哈',
-      educationalBackground: 'other',
-      grade: '哈哈',
-      major: '哈哈',
-      experience: '哈哈'
-    },
-    {
-      isCaptain: false,
-      name: '测试3',
-      gender: 'male',
-      email: 'test@qq.com',
-      phoneNumber: '哈哈',
-      school: '哈哈',
-      educationalBackground: 'other',
-      grade: '哈哈',
-      major: '哈哈',
-      experience: '哈哈'
-    }
-  ]
+  memberInfo: []
 };
 
 export const HackathonIndex: FC = () => {
@@ -76,7 +41,12 @@ export const HackathonIndex: FC = () => {
   const [editingMemberInfo, setEditingMemberInfo] = useState<MemberInfo>(null);
   const [showMemberInfoModal, setShowMemberInfoModal] = useState(false);
   return (
-    <div className={styles.container}>
+    <form
+      className={styles.container}
+      onSubmit={(event) => {
+        event.preventDefault();
+      }}
+    >
       {showMemberInfoModal && (
         <MemberInfoModal
           onDismiss={() => {
@@ -140,8 +110,22 @@ export const HackathonIndex: FC = () => {
           在报名截止前，可以通过取消选中并点击“提交更新”来撤销报名。
         </Label>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-          <Checkbox label="确认报名并锁定表单" />
-          <DefaultButton text="提交更新" />
+          <Checkbox
+            label="确认报名并锁定表单"
+            checked={formData.confirmed}
+            onChange={(_, checked) =>
+              setFormData(
+                update(formData, {
+                  confirmed: { $set: checked }
+                })
+              )
+            }
+          />
+          <DefaultButton
+            text="提交更新"
+            type="submit"
+            disabled={requesting || formData.memberInfo.length <= 0}
+          />
         </div>
       </div>
       <div className={styles.teamInfoSection}>
@@ -157,7 +141,7 @@ export const HackathonIndex: FC = () => {
               })
             )
           }
-          disabled={requesting}
+          disabled={requesting || formData.confirmed}
           required={true}
         />
         <TextField
@@ -172,7 +156,7 @@ export const HackathonIndex: FC = () => {
               })
             )
           }
-          disabled={requesting}
+          disabled={requesting || formData.confirmed}
           required={true}
         />
       </div>
@@ -185,6 +169,7 @@ export const HackathonIndex: FC = () => {
               setEditingMemberInfo(null);
               setShowMemberInfoModal(true);
             }}
+            disabled={requesting || formData.confirmed}
           >
             添加队员
           </DefaultButton>
@@ -195,6 +180,9 @@ export const HackathonIndex: FC = () => {
               key={`${JSON.stringify(info)}`}
               className={styles.item}
               onClick={() => {
+                if (requesting || formData.confirmed) {
+                  return;
+                }
                 setEditingMemberInfo(info);
                 setShowMemberInfoModal(true);
               }}
@@ -205,6 +193,6 @@ export const HackathonIndex: FC = () => {
           {formData.memberInfo?.length <= 0 && <span>暂无队员</span>}
         </div>
       </div>
-    </div>
+    </form>
   );
 };
