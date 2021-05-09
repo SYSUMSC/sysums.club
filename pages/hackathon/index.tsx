@@ -11,7 +11,8 @@ import Slider from 'react-slick';
 
 const CAROUSEL_IMAGE_URLS = [
   'https://sysumsc-website.oss-cn-shenzhen.aliyuncs.com/website-resource/hackathon.png',
-  'https://sysumsc-website.oss-cn-shenzhen.aliyuncs.com/website-resource/hackathon-1.jpg'
+  'https://sysumsc-website.oss-cn-shenzhen.aliyuncs.com/website-resource/hackathon-1.jpg',
+  'https://sysumsc-website.oss-cn-shenzhen.aliyuncs.com/website-resource/hackathon-2.jpg'
 ];
 
 export default function HackathonIndexPage() {
@@ -65,7 +66,7 @@ export default function HackathonIndexPage() {
         <div className={styles.sectionContainer}>
           <div className="w-full flex justify-center py-8 px-4">
             <div className="max-w-2xl w-full">
-              <h2 className="text-2xl md:text-3xl">
+              <h2 className="text-2xl md:text-3xl text-center md:text-left">
                 黑客马拉松，<strong>是什么？</strong>
               </h2>
               <p className="leading-7 font-light px-4 py-2">
@@ -79,7 +80,7 @@ export default function HackathonIndexPage() {
           </div>
           <div className="w-full flex justify-center py-8 px-4">
             <div className="max-w-2xl w-full">
-              <h2 className="text-3xl mb-2">
+              <h2 className="text-2xl md:text-3xl mb-2 text-center md:text-left">
                 参加黑客马拉松，<strong>我将收获什么？</strong>
               </h2>
               <div
@@ -138,7 +139,7 @@ export default function HackathonIndexPage() {
           </div>
           <div className="w-full flex justify-center py-8 px-4">
             <div className="max-w-2xl w-full">
-              <h2 className="text-2xl md:text-3xl">
+              <h2 className="text-2xl md:text-3xl text-center md:text-left">
                 好像还不错，<strong>参赛有什么要求呢？</strong>
               </h2>
               <p className="leading-7 font-light px-4 py-2">
@@ -151,7 +152,7 @@ export default function HackathonIndexPage() {
           </div>
           <div className="w-full flex justify-center py-8 px-4">
             <div className="max-w-2xl w-full">
-              <h2 className="text-2xl md:text-3xl">
+              <h2 className="text-2xl md:text-3xl text-center md:text-left">
                 黑客马拉松的<strong>赛程安排是？</strong>
               </h2>
               <div className="leading-7 font-light px-4 py-2">
@@ -213,7 +214,7 @@ export default function HackathonIndexPage() {
           </div>
           <div className="w-full flex justify-center py-8 px-4">
             <div className="max-w-2xl w-full">
-              <h2 className="text-2xl md:text-3xl">
+              <h2 className="text-2xl md:text-3xl text-center md:text-left">
                 我还有一些<strong>疑问</strong>......
               </h2>
               <div className="leading-7 font-light px-4 py-2">
@@ -237,17 +238,24 @@ export default function HackathonIndexPage() {
           </div>
           <div className={'w-full flex justify-center py-8 px-4 text-white ' + styles.greenSection}>
             <div className="max-w-2xl w-full">
-              <h2 className="text-2xl md:text-3xl">
+              <h2 className="text-2xl md:text-3xl text-center md:text-left">
                 我想来试试，<strong>如何报名参赛呢？</strong>
               </h2>
               <div className="leading-7 font-light px-4 py-2">
-                扫描下方二维码进入交流群，关注群公告以及管理员的通知：
+                <p>扫描下方二维码进入交流 QQ 群，关注群公告以及管理员的通知：</p>
+                <p>
+                  <img
+                    className="block w-36"
+                    src="https://sysumsc-website.oss-cn-shenzhen.aliyuncs.com/website-resource/hackathon-qq.jpg"
+                  />
+                </p>
+                <p className="mb-0">或是手动输入 QQ 群号码申请进群：736728870。</p>
               </div>
             </div>
           </div>
           <div className="w-full flex justify-center py-8 px-4">
             <div className="max-w-2xl w-full">
-              <h2 className="text-2xl md:text-3xl">比赛举办单位</h2>
+              <h2 className="text-2xl md:text-3xl text-center md:text-left">比赛举办单位</h2>
               <div className="leading-7 font-light px-4 py-4 flex">
                 <div className="mr-12">
                   <img className="block max-w-36" src="/logo-h120.png" />
