@@ -15,18 +15,20 @@ export default function HackathonSignupIndexPage() {
       <Head>
         <title>2021“智慧校园”黑客马拉松 · SYSUMSC</title>
       </Head>
-      <div className="flex-grow p-6">
-        {!error && !data && (
+      {!error && !data && (
+        <div className="flex-grow p-6">
           <LoadingIndicatorWithMessage loading={true} extraStyles={{ color: '#151518' }} />
-        )}
-        {error && (
+        </div>
+      )}
+      {error && (
+        <div className="flex-grow p-6">
           <LoadingIndicatorWithMessage
             errorMessage={error.message === 'Unauthorized' ? '请先登录再进行报名' : error.message}
             extraStyles={{ color: '#151518' }}
           />
-        )}
-        {data && <HackathonIndex signupFormData={data as any} />}
-      </div>
+        </div>
+      )}
+      {data && <HackathonIndex signupFormData={data as any} />}
     </AppFrame>
   );
 }

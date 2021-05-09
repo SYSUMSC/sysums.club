@@ -8,6 +8,7 @@ import { CertificateIcon } from '../../components/icons/CertificateIcon';
 import { FoodIcon } from '../../components/icons/FoodIcon';
 import styles from './index.module.scss';
 import Slider from 'react-slick';
+import { CalendarIcon } from '../../components/icons/CalendarIcon';
 
 const CAROUSEL_IMAGE_URLS = [
   'https://sysumsc-website.oss-cn-shenzhen.aliyuncs.com/website-resource/hackathon.png',
@@ -159,7 +160,10 @@ export default function HackathonIndexPage() {
                 <div>
                   <h4>
                     <span className="font-normal">报名征集</span>
-                    <span className="pl-4 italic">2021.5.9 ~ 2021.5.21</span>
+                    <span className="pl-2">
+                      <CalendarIcon />
+                      2021.5.9 ~ 2021.5.21
+                    </span>
                   </h4>
                   <p className="pl-2">
                     本次活动面向中山大学与华南理工大学<strong>所有的本科生与研究生</strong>。
@@ -173,7 +177,10 @@ export default function HackathonIndexPage() {
                 <div>
                   <h4>
                     <span className="font-normal">技术讲座</span>
-                    <span className="pl-4 italic">2021.5.16</span>
+                    <span className="pl-2">
+                      <CalendarIcon />
+                      2021.5.16
+                    </span>
                   </h4>
                   <p className="pl-2">
                     由中大 MS 俱乐部前主席贺恩泽、前副主席傅禹泽开展黑客松技术宣讲，主题包括：
@@ -188,7 +195,10 @@ export default function HackathonIndexPage() {
                 <div>
                   <h4>
                     <span className="font-normal">比赛开始</span>
-                    <span className="pl-4 italic">2021.5.21 14:00 ~ 2021.5.23 14:00</span>
+                    <span className="pl-2">
+                      <CalendarIcon />
+                      2021.5.21 14:00 ~ 2021.5.23 14:00
+                    </span>
                   </h4>
                   <p className="pl-2">
                     参赛队伍选定题目，利用相应材料<strong>在 48 小时内完成项目的开发</strong>
@@ -198,14 +208,20 @@ export default function HackathonIndexPage() {
                 <div>
                   <h4>
                     <span className="font-normal">项目展示</span>
-                    <span className="pl-4 italic">2021.5.23 14:00 ~ 2021.5.23 17:00</span>
+                    <span className="pl-2">
+                      <CalendarIcon />
+                      2021.5.23 14:00 ~ 2021.5.23 17:00
+                    </span>
                   </h4>
                   <p className="pl-2">参赛队伍展示完成的项目，并进行线上评分。</p>
                 </div>
                 <div>
                   <h4>
                     <span className="font-normal">颁奖典礼</span>
-                    <span className="pl-4 italic">2021.5.23 17:00 ~ 18:00</span>
+                    <span className="pl-2">
+                      <CalendarIcon />
+                      2021.5.23 17:00 ~ 18:00
+                    </span>
                   </h4>
                   <p className="pl-2">进行颁奖典礼，最后进行闭幕式。</p>
                 </div>
