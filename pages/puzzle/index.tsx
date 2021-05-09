@@ -28,10 +28,13 @@ export default function PuzzleIndexPage() {
       </Head>
       <div className={styles.rootContainer}>
         <div className={styles.centerContainer}>
-          {!error && !data && <LoadingIndicatorWithMessage loading={true} />}
+          {!error && !data && (
+            <LoadingIndicatorWithMessage loading={true} extraStyles={{ color: '#f8f9fa' }} />
+          )}
           {error && (
             <LoadingIndicatorWithMessage
               errorMessage={error.message === 'Unauthorized' ? '请先登录再进行解谜' : error.message}
+              extraStyles={{ color: '#f8f9fa' }}
             />
           )}
           {data && (

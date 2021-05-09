@@ -39,7 +39,7 @@ export const RegisterModal: FC<RegisterModalProps> = ({ showModal, onHide }) => 
           },
           true
         );
-        Promise.all([mutate('user/profile'), mutate('puzzle/problem')]);
+        Promise.all([mutate('user/profile'), mutate('puzzle/problem'), mutate('hackathon/form')]);
         onHide();
       } catch (error) {
         setErrorMessage(error.message);

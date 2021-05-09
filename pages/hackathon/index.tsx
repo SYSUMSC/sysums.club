@@ -4,12 +4,11 @@ import Head from 'next/head';
 import React from 'react';
 import useSWR from 'swr';
 import { fetchFromApi } from '../../utils/api';
-import { GetPuzzleProblemsResponse } from '../puzzle';
 import { LoadingIndicatorWithMessage } from '../../components/shared/loading-indicator-with-message/loading-indicator-with-message';
 import { HackathonIndex } from '../../components/hackathon/hackathon-index/hackathon-index';
 
 export default function PuzzleIndexPage() {
-  const { data, error } = useSWR<GetPuzzleProblemsResponse>('puzzle/problem', fetchFromApi, {
+  const { data, error } = useSWR('hackathon/form', fetchFromApi, {
     shouldRetryOnError: false
   });
   return (
@@ -18,13 +17,16 @@ export default function PuzzleIndexPage() {
         <title>2021“智慧校园”黑客马拉松 · SYSUMSC</title>
       </Head>
       <div className={styles.rootContainer}>
-        {!error && !data && <LoadingIndicatorWithMessage loading={true} />}
+        {!error && !data && (
+          <LoadingIndicatorWithMessage loading={true} extraStyles={{ color: '#151518' }} />
+        )}
         {error && (
           <LoadingIndicatorWithMessage
             errorMessage={error.message === 'Unauthorized' ? '请先登录再进行报名' : error.message}
+            extraStyles={{ color: '#151518' }}
           />
         )}
-        <HackathonIndex />
+        {data && <HackathonIndex signupFormData={data as any} />}
       </div>
     </AppFrame>
   );

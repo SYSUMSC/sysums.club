@@ -44,7 +44,12 @@ export const LoginModal: FC<LoginModalProps> = ({
           },
           true
         );
-        Promise.all([mutate('user/profile'), mutate('puzzle/problem'), mutate('recruit')]);
+        Promise.all([
+          mutate('user/profile'),
+          mutate('puzzle/problem'),
+          mutate('recruit'),
+          mutate('hackathon/form')
+        ]);
         onHide();
       } catch (error) {
         setErrorMessage(error.message);

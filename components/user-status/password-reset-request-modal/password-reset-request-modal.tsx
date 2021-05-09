@@ -24,25 +24,26 @@ export const PasswordResetRequestModal: FC<PasswordResetRequestModalProps> = ({
   const [email, setEmail] = useState('');
 
   async function onSubmit(form: HTMLFormElement) {
-    const dto: PasswordResetRequestDto = { email };
-    if (form.checkValidity()) {
-      setRequesting(true);
-      try {
-        await fetchFromApi(
-          'user/reset-request',
-          {
-            method: 'POST',
-            body: JSON.stringify(dto)
-          },
-          true
-        );
-        setErrorMessage('');
-        setSuccess(true);
-      } catch (error) {
-        setErrorMessage(error.message);
-      }
-      setRequesting(false);
+    if (!form.checkValidity()) {
+      return;
     }
+    const dto: PasswordResetRequestDto = { email };
+    setRequesting(true);
+    try {
+      await fetchFromApi(
+        'user/reset-request',
+        {
+          method: 'POST',
+          body: JSON.stringify(dto)
+        },
+        true
+      );
+      setErrorMessage('');
+      setSuccess(true);
+    } catch (error) {
+      setErrorMessage(error.message);
+    }
+    setRequesting(false);
   }
 
   return (

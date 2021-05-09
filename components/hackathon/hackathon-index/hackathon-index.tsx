@@ -1,8 +1,11 @@
 import styles from './hackathon-index.module.scss';
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Checkbox, DefaultButton, Label, Persona, TextField } from '@fluentui/react';
 import update from 'immutability-helper';
 import { MemberInfoModal } from '../member-info-modal/member-info-modal';
+import { fetchFromApi } from '../../../utils/api';
+import { AsyncDataButton } from '../../shared/async-data-button/async-data-button';
+import { useAsyncAction } from '../../../utils/utils';
 
 export interface MemberInfo {
   isCaptain: boolean;
@@ -35,16 +38,50 @@ const DEFAULT_FORM_DATA: SignupFormData = {
   memberInfo: []
 };
 
-export const HackathonIndex: FC = () => {
-  const [formData, setFormData] = useState<SignupFormData>(DEFAULT_FORM_DATA);
-  const [requesting, setRequesting] = useState(false);
+export interface HackathonIndexProps {
+  signupFormData: SignupFormData;
+}
+
+export const HackathonIndex: FC<HackathonIndexProps> = ({ signupFormData }) => {
+  const [formData, setFormData] = useState<SignupFormData>(signupFormData);
+
   const [editingMemberInfo, setEditingMemberInfo] = useState<MemberInfo>(null);
   const [showMemberInfoModal, setShowMemberInfoModal] = useState(false);
+
+  const [requesting, setRequesting, errorMessage, setErrorMessage] = useAsyncAction();
+  const [formUpdated, setFormUpdated] = useState(false);
+
+  useEffect(() => {
+    setFormUpdated(false);
+  }, [formData]);
+
+  async function onSubmit(form: HTMLFormElement) {
+    if (!form.checkValidity()) {
+      return;
+    }
+    try {
+      await fetchFromApi(
+        'hackathon/form',
+        {
+          method: 'POST',
+          body: JSON.stringify(formData)
+        },
+        true
+      );
+      setErrorMessage('');
+      setFormUpdated(true);
+    } catch (error) {
+      setErrorMessage(error.message);
+    }
+    setRequesting(false);
+  }
+
   return (
     <form
       className={styles.container}
       onSubmit={(event) => {
         event.preventDefault();
+        onSubmit(event.currentTarget);
       }}
     >
       {showMemberInfoModal && (
@@ -74,10 +111,10 @@ export const HackathonIndex: FC = () => {
             setEditingMemberInfo(null);
           }}
           onSave={(isNewMember, oldInfo, newInfo) => {
-            let newFormData = formData;
-            if (newFormData.memberInfo.length <= 0) {
-              newInfo.isCaptain = true;
+            if (formData.memberInfo.length <= 0) {
+              newInfo = update(newInfo, { isCaptain: { $set: true } });
             }
+            let newFormData = formData;
             if (newInfo.isCaptain) {
               newFormData = {
                 ...newFormData,
@@ -121,10 +158,15 @@ export const HackathonIndex: FC = () => {
               )
             }
           />
-          <DefaultButton
-            text="提交更新"
+          <AsyncDataButton
             type="submit"
-            disabled={requesting || formData.memberInfo.length <= 0}
+            iconProps={{ iconName: formUpdated ? 'CheckMark' : undefined }}
+            text={!formUpdated ? '提交表格' : '表格已更新'}
+            extra={{
+              isLoading: requesting,
+              forceDisabled: formUpdated || formData.memberInfo.length <= 0,
+              errorMessage
+            }}
           />
         </div>
       </div>

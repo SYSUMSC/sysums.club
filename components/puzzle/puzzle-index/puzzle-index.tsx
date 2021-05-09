@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import styles from './puzzle-index.module.scss';
 import { useRouter } from 'next/router';
 import { FontIcon } from '@fluentui/react';
-import { GhostButton } from '../../shared/ghost-button/GhostButton';
+import { GhostButton } from '../../shared/ghost-button/ghost-button';
 
 export type PuzzleIndexProps = {
   submissionsCount: number;

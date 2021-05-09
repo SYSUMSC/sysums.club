@@ -8,6 +8,30 @@ body {
   font-weight: 300;
 }
 
+.link-63 {
+  outline: transparent;
+  position: relative;
+  font-family: 'Segoe UI', 'Segoe UI Web (West European)', 'Segoe UI', -apple-system,
+    BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-size: 14px;
+  font-weight: 400;
+  box-sizing: border-box;
+  border: 0px;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  padding: 0px 8px;
+  border-radius: 0px;
+  height: 44px;
+  color: rgb(50, 49, 48);
+  background-color: transparent;
+  line-height: 44px;
+  margin-right: 8px;
+  user-select: none;
+}
+
 header {
   .ms-Pivot-text {
     color: #f8f9fa !important;
@@ -56,26 +80,6 @@ h4,
 h5,
 h6 {
   margin: 0;
-}
-
-.anticon {
-  // https://github.com/ant-design/ant-design-icons/issues/7
-  // 但是在本项目中需要设置正值的0.1em才能对齐，而且在不同浏览器上显示效果依然有区别
-  // 目前尚不清楚原因
-  vertical-align: 0.1em;
-}
-
-button .anticon {
-  padding-right: 8px;
-}
-
-.markdown-body {
-  color: $text-color-article-black;
-}
-
-code {
-  word-wrap: break-word;
-  color: unset !important;
 }
 
 p {

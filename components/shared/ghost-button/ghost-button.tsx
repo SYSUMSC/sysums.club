@@ -1,4 +1,4 @@
-import styles from './GhostButton.module.scss';
+import styles from './ghost-button.module.scss';
 import { FC, HTMLAttributes, MouseEventHandler, PropsWithChildren } from 'react';
 
 export type GhostButtonVariant = 'white' | 'blue' | 'yellow' | 'red';
