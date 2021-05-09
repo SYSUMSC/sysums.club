@@ -1,7 +1,7 @@
 import { AppFrame } from '../../components/frame';
 import Head from 'next/head';
 import React from 'react';
-import { ActionButton } from '@fluentui/react';
+import { ActionButton, FontIcon } from '@fluentui/react';
 import { LearnIcon } from '../../components/icons/LearnIcon';
 import { MoneyIcon } from '../../components/icons/MoneyIcon';
 import { CertificateIcon } from '../../components/icons/CertificateIcon';
@@ -44,21 +44,21 @@ export default function HackathonIndexPage() {
                 'rgba(0, 0, 0, 0.25) linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent 50%)'
             }}
           />
-          <div className="z-10 absolute inset-x-0 bottom-0 px-4 py-2">
+          <div className="z-10 absolute inset-x-0 bottom-0 px-4 py-2 md:px-8 md:py-4">
             <h2 className="text-white font-bold text-2xl md:text-4xl mb-4 tracking-wider">
               欢迎参加 2021 “智慧校园” 黑客马拉松
             </h2>
             <p className="text-white mb-1 flex items-center text-sm md:text-xl">
-              <span className="pt-0.5">由中山大学 MS 俱乐部和华南理工大学微软俱乐部联合举办</span>
-              <ActionButton className="text-white" iconProps={{ iconName: 'ArrowUpRight' }}>
-                <a
-                  className="text-sm md:text-xl"
-                  style={{ color: '#2380d0' }}
-                  target="_blank"
-                  href="/hackathon/signup"
-                >
-                  跳转到报名页面
-                </a>
+              <span className="pt-1 pr-1">
+                由中山大学 MS 俱乐部和华南理工大学微软俱乐部联合举办
+              </span>
+              <ActionButton>
+                <span style={{ color: '#2380d0' }} className="text-sm md:text-xl">
+                  <a style={{ color: '#2380d0' }} target="_blank" href="/hackathon/signup">
+                    跳转到报名页面
+                  </a>
+                  <FontIcon iconName="ArrowUpRight" />
+                </span>
               </ActionButton>
             </p>
           </div>
