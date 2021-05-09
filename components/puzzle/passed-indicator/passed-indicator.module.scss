@@ -6,6 +6,7 @@
   text-align: center;
 
   .congratulation {
+    @apply text-3xl;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);

@@ -63,6 +63,7 @@
         letter-spacing: 0.1em;
         color: $theme-text-color-white;
         text-shadow: 0 0 4px rgba(0, 0, 0, 0.8), 0 0 16px rgba(0, 0, 0, 1);
+        @apply text-xl;
 
         a {
           color: unset;
@@ -89,18 +90,21 @@
         .title {
           color: $theme-text-color-white;
           text-align: center;
+          @apply text-2xl mb-4;
         }
 
         .paragraph {
           padding: 0 12px;
           line-height: 1.75;
           word-break: break-word;
+          @apply font-light;
         }
 
         .quoteSource {
           padding: 0 12px;
           text-align: center;
           line-height: 1.75;
+          @apply font-light;
         }
 
         .imageContainer {
