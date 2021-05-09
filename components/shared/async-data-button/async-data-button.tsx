@@ -17,21 +17,13 @@ export const AsyncDataButton: FC<AsyncDataButtonProps> = ({
   ...props
 }) => {
   const target = useRef(null);
-
-  function getIconName() {
-    if (!isLoading && errorMessage) {
-      return 'Warning';
-    }
-    return undefined;
-  }
-
   return (
     <TooltipHost
       directionalHint={DirectionalHint.bottomCenter}
       content={!isLoading ? errorMessage : undefined}
     >
       <DefaultButton
-        iconProps={{ iconName: getIconName() }}
+        iconProps={{ iconName: !isLoading && errorMessage ? 'Warning' : undefined }}
         disabled={isLoading || forceDisabled}
         ref={target}
         text={text}

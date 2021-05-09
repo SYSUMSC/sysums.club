@@ -1,6 +1,14 @@
 import styles from './hackathon-index.module.scss';
 import React, { FC, useEffect, useState } from 'react';
-import { Checkbox, DefaultButton, Label, Persona, TextField } from '@fluentui/react';
+import {
+  Checkbox,
+  DefaultButton,
+  Label,
+  MessageBar,
+  MessageBarType,
+  Persona,
+  TextField
+} from '@fluentui/react';
 import update from 'immutability-helper';
 import { MemberInfoModal } from '../member-info-modal/member-info-modal';
 import { fetchFromApi } from '../../../utils/api';
@@ -139,6 +147,9 @@ export const HackathonIndex: FC<HackathonIndexProps> = ({ signupFormData }) => {
           }}
         />
       )}
+      <MessageBar messageBarType={MessageBarType.warning}>
+        请务必遵从比赛交流 QQ 群中群公告和管理员的指示进行参赛报名。
+      </MessageBar>
       <div className={styles.confirmSection}>
         <h2 className={styles.heading}>确认与提交</h2>
         <Label disabled>
@@ -160,7 +171,13 @@ export const HackathonIndex: FC<HackathonIndexProps> = ({ signupFormData }) => {
           />
           <AsyncDataButton
             type="submit"
-            iconProps={{ iconName: formUpdated ? 'CheckMark' : undefined }}
+            iconProps={{
+              iconName: formUpdated
+                ? 'CheckMark'
+                : !requesting && errorMessage
+                ? 'Warning'
+                : undefined
+            }}
             text={!formUpdated ? '提交表格' : '表格已更新'}
             extra={{
               isLoading: requesting,
@@ -211,7 +228,7 @@ export const HackathonIndex: FC<HackathonIndexProps> = ({ signupFormData }) => {
               setEditingMemberInfo(null);
               setShowMemberInfoModal(true);
             }}
-            disabled={requesting || formData.confirmed}
+            disabled={requesting || formData.confirmed || formData.memberInfo?.length > 6}
           >
             添加队员
           </DefaultButton>
@@ -232,8 +249,13 @@ export const HackathonIndex: FC<HackathonIndexProps> = ({ signupFormData }) => {
               <Persona text={info.name} secondaryText={info.isCaptain ? '队长' : '队员'} />
             </div>
           ))}
-          {formData.memberInfo?.length <= 0 && <span>暂无队员</span>}
         </div>
+        {formData.memberInfo?.length <= 0 && (
+          <MessageBar messageBarType={MessageBarType.info}>
+            点击"添加队员"按钮来添加新的队员，每个队伍的队员人数
+            <strong>只能为 2 至 6 人</strong>。
+          </MessageBar>
+        )}
       </div>
     </form>
   );

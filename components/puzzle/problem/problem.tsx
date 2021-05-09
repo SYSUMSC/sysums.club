@@ -5,8 +5,8 @@ import { useAsyncAction } from '../../../utils/utils';
 import { fetchFromApi } from '../../../utils/api';
 import { useRouter } from 'next/router';
 import { PassedIndicator } from '../passed-indicator/passed-indicator';
-import { DefaultButton, TextField } from '@fluentui/react';
-import { GhostButton } from '../../shared/ghost-button/GhostButton';
+import { TextField } from '@fluentui/react';
+import { GhostButton } from '../../shared/ghost-button/ghost-button';
 
 export type ProblemProps = {
   id: number;

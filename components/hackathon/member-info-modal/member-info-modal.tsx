@@ -25,7 +25,7 @@ export const MemberInfoModal: FC<MemberInfoProps & Omit<IModalProps, 'caption' |
   ...props
 }) => {
   const [modifiedInfo, setModifiedInfo] = useState(
-    memberInfo ?? ({ name: '新成员' } as MemberInfo)
+    memberInfo ?? ({ name: '新成员', isCaptain: false } as MemberInfo)
   );
   return (
     <AppModal {...props} caption={`队伍成员：${modifiedInfo.name}`} isBlocking={true}>
