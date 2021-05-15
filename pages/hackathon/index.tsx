@@ -20,7 +20,7 @@ export default function HackathonIndexPage() {
   return (
     <AppFrame>
       <Head>
-        <title>2021“智慧校园”黑客马拉松 · SYSUMSC</title>
+        <title>2021 黑客马拉松 · SYSUMSC</title>
       </Head>
       <div className="flex-grow">
         <div className="relative">
@@ -47,7 +47,7 @@ export default function HackathonIndexPage() {
           />
           <div className="z-10 absolute inset-x-0 bottom-0 px-4 py-2 md:px-8 md:py-4">
             <h2 className="text-white font-bold text-2xl md:text-4xl mb-4 tracking-wider">
-              欢迎参加 2021 “智慧校园” 黑客马拉松
+              欢迎参加 2021 黑客马拉松
             </h2>
             <p className="text-white mb-1 flex items-center text-sm md:text-xl">
               <span className="pt-1 pr-1">

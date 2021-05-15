@@ -13,7 +13,7 @@ export default function HackathonSignupIndexPage() {
   return (
     <AppFrame hideFooter={true}>
       <Head>
-        <title>2021“智慧校园”黑客马拉松 · SYSUMSC</title>
+        <title>2021 黑客马拉松 · SYSUMSC</title>
       </Head>
       {!error && !data && (
         <div className="flex-grow p-6">
