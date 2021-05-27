@@ -35,11 +35,6 @@ export const AppFrame: FC<AppFrameProps> = ({ children, hideFooter }) => {
               <PivotItem headerText="首页" itemKey="/" key="/" />
               <PivotItem headerText="社刊" itemKey="/journal" key="/journal" />
               <PivotItem headerText="解谜" itemKey="/puzzle" key="/puzzle" />
-              <PivotItem
-                headerText="2021 黑客马拉松"
-                itemKey="/hackathon"
-                key="/hackathon"
-              />
             </Pivot>
           </nav>
           <div className={styles.userStatus}>
